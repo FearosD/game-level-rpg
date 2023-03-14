@@ -1,0 +1,40 @@
+{
+  "name": "parcel-template",
+  "version": "1.0.0",
+  "description": "template for projects",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predev": "rm -rf dist",
+    "dev": "npm run predev && parcel src/index.html --open",
+    "prebuild": "rm -rf public",
+    "build": "npm run prebuild && parcel build src/index.html --dist-dir=public",
+    "clearcache": "rm -rf .parcel-cache"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FearosD/parcel-template.git"
+  },
+  "author": "Fearos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FearosD/parcel-template/issues"
+  },
+  "homepage": "https://github.com/FearosD/parcel-template#readme",
+  "staticFiles": {
+    "staticPath": "src/images",
+    "staticOutPath": "images"
+  },
+  "parcel-namer-custom": {
+    ".(scss|css)$": "[folder]/[name].[hash].[type]",
+    ".(jpg|gif|png|webp|svg)$": "[folder]/[name].[type]",
+    ".(ttf|otf|woff|woff2)$": "[folder]/[name].[type]",
+    ".js?$": "[folder]/[name].[hash].[type]"
+  },
+  "devDependencies": {
+    "parcel": "^2.7.0",
+    "parcel-namer-custom": "^0.2.0",
+    "parcel-reporter-static-files-copy": "^1.4.0"
+  }
+}
