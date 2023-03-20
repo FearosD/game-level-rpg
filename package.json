@@ -1,5 +1,5 @@
 {
-  "name": "parcel-template",
+  "name": "game-level-rpg",
   "version": "1.0.0",
   "description": "template for projects",
   "type": "module",
@@ -14,14 +14,14 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FearosD/parcel-template.git"
+    "url": "git+https://github.com/FearosD/game-level-rpg.git"
   },
   "author": "Fearos",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/FearosD/parcel-template/issues"
+    "url": "https://github.com/FearosD/game-level-rpg/issues"
   },
-  "homepage": "https://github.com/FearosD/parcel-template#readme",
+  "homepage": "https://github.com/FearosD/game-level-rpg#readme",
   "staticFiles": {
     "staticPath": "src/images",
     "staticOutPath": "images"
