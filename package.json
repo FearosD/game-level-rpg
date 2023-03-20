@@ -33,8 +33,12 @@
     ".js?$": "[folder]/[name].[hash].[type]"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
     "parcel": "^2.7.0",
     "parcel-namer-custom": "^0.2.0",
     "parcel-reporter-static-files-copy": "^1.4.0"
+  },
+  "dependencies": {
+    "rsup-progress": "^3.1.1"
   }
 }
