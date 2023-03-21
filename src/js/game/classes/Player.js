@@ -9,6 +9,7 @@ export default class Player extends AnimatedSprite {
     maxFrame = 1,
     holdFrame = 1,
     animations,
+    currentPosition = [1, 1],
   }) {
     super({ position, imageName, ctx, scale, maxFrame, holdFrame, animations });
 
@@ -18,6 +19,8 @@ export default class Player extends AnimatedSprite {
       height: 48,
       width: 48,
     };
+
+    this.currentPosition = currentPosition;
   }
 
   draw() {
