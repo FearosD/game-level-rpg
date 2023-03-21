@@ -23,12 +23,13 @@
   },
   "homepage": "https://github.com/FearosD/game-level-rpg#readme",
   "staticFiles": {
-    "staticPath": "src/images",
-    "staticOutPath": "images"
+    "staticPath": "src/assets",
+    "staticOutPath": "assets"
   },
   "parcel-namer-custom": {
     ".(scss|css)$": "[folder]/[name].[hash].[type]",
     ".(jpg|gif|png|webp|svg)$": "[folder]/[name].[type]",
+    ".(mp3|wav)$": "[folder]/[name].[type]",
     ".(ttf|otf|woff|woff2)$": "[folder]/[name].[type]",
     ".js?$": "[folder]/[name].[hash].[type]"
   },

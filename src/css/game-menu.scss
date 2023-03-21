@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../images/ui/menu/menu.png');
+  background-image: url('../assets/images/ui/menu/menu.png');
 
   animation-name: slidein;
   animation-duration: 1s;
@@ -39,10 +39,10 @@
   padding-top: 6px;
   width: 192px;
   height: 64px;
-  background-image: url('../images/ui/menu/btn-normal.png');
+  background-image: url('../assets/images/ui/menu/btn-normal.png');
 
   &:hover {
-    background-image: url('../images/ui/menu/btn-hover.png');
+    background-image: url('../assets/images/ui/menu/btn-hover.png');
   }
 }
 
@@ -52,7 +52,7 @@
   position: absolute;
   bottom: 288px;
   left: 16px;
-  background-image: url('../images/ui/menu/left-chain.png');
+  background-image: url('../assets/images/ui/menu/left-chain.png');
 }
 
 .right-chain {
@@ -61,7 +61,7 @@
   height: 256px;
   bottom: 288px;
   right: 16px;
-  background-image: url('../images/ui/menu/right-chain.png');
+  background-image: url('../assets/images/ui/menu/right-chain.png');
 }
 
 @keyframes slidein {
