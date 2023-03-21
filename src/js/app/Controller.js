@@ -1,4 +1,9 @@
-import { assetsImages, takeAsset } from '../helpers/assets-list';
+import {
+  assetsImages,
+  takeImage,
+  assetsSounds,
+  takeSound,
+} from '../helpers/assets-list';
 
 export default class Controller {
   constructor({ menu, gameContainer, loader }) {
@@ -21,8 +26,8 @@ export default class Controller {
     this.loader.gameLoader.style.display = 'block';
     await this.loader.start();
     console.warn('Load Assets End');
-    console.log(assetsImages);
-    console.log(takeAsset(assetsImages, 'dungeon-map'));
+    console.log(takeImage(assetsImages, 'dungeon-map'));
+    console.log(takeSound(assetsSounds, 'Block'));
   }
 
   gameLoad() {
