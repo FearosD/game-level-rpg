@@ -1,12 +1,69 @@
 .game__menu {
   display: block;
+  width: 320px;
+  height: 384px;
+  position: absolute;
+  top: 160px;
+  left: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../images/ui/menu/menu.png');
+
+  animation-duration: 1s;
+  animation-name: slidein;
+  animation-timing-function: cubic-bezier(0.425, 1.55, 0.335, 0.545);
+  animation-direction: alternate;
+}
+
+.game__buttons {
+  display: flex;
+  flex-direction: column;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
 
 .game__button {
   color: white;
   font-family: 'Monogram';
   font-size: 48px;
-  background-color: #fefefeb2;
-  padding: 20px;
-  margin: 40px auto;
+  text-align: center;
+  padding-top: 6px;
+  width: 192px;
+  height: 64px;
+  background-image: url('../images/ui/menu/btn-normal.png');
+
+  &:hover {
+    background-image: url('../images/ui/menu/btn-hover.png');
+  }
+}
+
+.left-chain {
+  width: 64px;
+  height: 256px;
+  position: absolute;
+  bottom: 288px;
+  left: 16px;
+  background-image: url('../images/ui/menu/left-chain.png');
+}
+
+.right-chain {
+  position: absolute;
+  width: 64px;
+  height: 256px;
+  bottom: 288px;
+  right: 16px;
+  background-image: url('../images/ui/menu/right-chain.png');
+}
+
+@keyframes slidein {
+  from {
+    top: -380px;
+  }
+
+  to {
+    top: 160px;
+  }
 }

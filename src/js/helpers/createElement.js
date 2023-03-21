@@ -3,11 +3,16 @@ export default function createElement(options) {
     typeElem: 'div',
     classElem: 'class',
     innerElem: '',
+    id: null,
   };
 
-  const { typeElem, classElem, innerElem } = { ...defaultOptions, ...options };
+  const { typeElem, classElem, innerElem, id } = {
+    ...defaultOptions,
+    ...options,
+  };
   const element = document.createElement(typeElem);
   element.className = classElem;
   element.innerHTML = innerElem;
+  if (id) element.id = id;
   return element;
 }

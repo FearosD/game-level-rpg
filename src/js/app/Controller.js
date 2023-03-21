@@ -11,6 +11,8 @@ export default class Controller {
     this.gameContainer.append(this.menu.createMenu());
     this.gameContainer.append(this.loader.createLoader());
     this.menu.subscribe('game start', this.gameStart.bind(this));
+    this.menu.subscribe('game load', this.gameLoad.bind(this));
+    this.menu.subscribe('game options', this.gameOptions.bind(this));
   }
 
   async gameStart() {
@@ -20,5 +22,13 @@ export default class Controller {
     await this.loader.start();
     console.warn('Load Assets End');
     console.log(assetsImages);
+  }
+
+  gameLoad() {
+    console.warn('Game Load');
+  }
+
+  gameOptions() {
+    console.warn('Game Options');
   }
 }
