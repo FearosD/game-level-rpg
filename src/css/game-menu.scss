@@ -10,10 +10,16 @@
   justify-content: center;
   background-image: url('../images/ui/menu/menu.png');
 
-  animation-duration: 1s;
   animation-name: slidein;
+  animation-duration: 1s;
   animation-timing-function: cubic-bezier(0.425, 1.55, 0.335, 0.545);
-  animation-direction: alternate;
+
+  &--slideout {
+    animation-name: slideout;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.18, 0.8, 0.255, 0.96);
+    animation-fill-mode: forwards;
+  }
 }
 
 .game__buttons {
@@ -65,5 +71,11 @@
 
   to {
     top: 160px;
+  }
+}
+
+@keyframes slideout {
+  to {
+    top: -380px;
   }
 }

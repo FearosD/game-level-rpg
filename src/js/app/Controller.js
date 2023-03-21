@@ -17,7 +17,7 @@ export default class Controller {
 
   async gameStart() {
     console.warn('Game Start');
-    this.menu.gameMenu.style.display = 'none';
+    this.menu.gameMenu.classList.add('game__menu--slideout');
     this.loader.gameLoader.style.display = 'block';
     await this.loader.start();
     console.warn('Load Assets End');
@@ -26,6 +26,7 @@ export default class Controller {
 
   gameLoad() {
     console.warn('Game Load');
+    this.menu.gameMenu.classList.add('game__menu--slideout');
   }
 
   gameOptions() {
