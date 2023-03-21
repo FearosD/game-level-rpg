@@ -133,7 +133,7 @@ export default class Dungeon {
 
       const path = finder.findPath(startX, startY, endX, endY, gridBackup);
       if (path.length === 0) {
-        canMove = true;
+        this.canMove = true;
         return;
       }
 
