@@ -6,10 +6,11 @@ import {
 } from '../helpers/assets-list';
 
 export default class Controller {
-  constructor({ menu, gameContainer, loader }) {
+  constructor({ menu, gameContainer, loader, game }) {
     this.gameContainer = gameContainer;
     this.menu = menu;
     this.loader = loader;
+    this.game = game;
   }
 
   initGame() {
@@ -26,8 +27,11 @@ export default class Controller {
     this.loader.gameLoader.style.display = 'block';
     await this.loader.start();
     console.warn('Load Assets End');
-    console.log(takeImage(assetsImages, 'dungeon-map'));
-    console.log(takeSound(assetsSounds, 'Block'));
+    // console.log(takeImage('dungeon-map'));
+    // console.log(takeSound('Block'));
+    this.loader.gameLoader.remove();
+    this.gameContainer.append(this.game.createGame());
+    this.game.startGame();
   }
 
   gameLoad() {
