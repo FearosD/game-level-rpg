@@ -20,6 +20,7 @@ export default class Dungeon {
       x: -864,
       y: -336,
     };
+    this.levelStart = false;
   }
 
   createLevel(canvas) {
@@ -35,11 +36,13 @@ export default class Dungeon {
       imageName: 'dungeon-map',
       scale: 1,
       ctx: this.ctx,
+      name: 'dungeon-map',
     });
 
     const testNpc = new AnimatedSprite({
       ctx: this.ctx,
       imageName: 'marchant-idle',
+      name: 'test-npc',
       scale: 1.5,
       position: {
         x: this.canvas.width / 2 - 42 + 48 * 4,
@@ -59,6 +62,7 @@ export default class Dungeon {
     this.player = new Player({
       ctx: this.ctx,
       imageName: 'player-idle',
+      name: 'player',
       scale: 1.5,
       position: { x: canvas.width / 2 - 42, y: canvas.height / 2 - 24 },
       maxFrame: 4,
@@ -108,11 +112,10 @@ export default class Dungeon {
     this.player.update();
   };
 
-  startLevel() {
-    this.animate();
-
+  pathfindingFunc() {
     const grid = new Pathfinding.Grid(parsedDungeonCollisions);
-    const pathfindingFunc = pathfinding.bind(this, {
+
+    return pathfinding({
       event,
       canMove: this.canMove,
       canvasRect: this.canvasRect,
@@ -123,8 +126,16 @@ export default class Dungeon {
       moveFunc: this.moveMap,
       context: this,
     });
+  }
 
-    this.canvas.addEventListener('click', pathfindingFunc);
+  startLevel() {
+    if (!this.levelStart) {
+      this.animate();
+
+      this.canvas.addEventListener('click', this.pathfindingFunc.bind(this));
+
+      this.levelStart = true;
+    }
   }
 
   moveMap(keyFrames, endX, endY) {
@@ -138,6 +149,34 @@ export default class Dungeon {
           this.canMove = true;
         },
       });
+    });
+  }
+
+  saveLevel() {
+    const saveData = {
+      position: { player: { posX: this.player.posX, posY: this.player.posY } },
+      currentPlayerPosition: [...this.player.currentPosition],
+      level: this.name,
+    };
+
+    this.levelObject.forEach((object) => {
+      saveData.position[object.name] = {
+        posX: object.posX,
+        posY: object.posY,
+      };
+    });
+    return saveData;
+  }
+
+  loadLevel(saveData) {
+    console.log(saveData);
+    this.player.currentPosition = [...saveData.currentPlayerPosition];
+    this.player.posX = saveData.position.player.posX;
+    this.player.posY = saveData.position.player.posY;
+
+    this.levelObject.forEach((object) => {
+      object.posX = saveData.position[object.name].posX;
+      object.posY = saveData.position[object.name].posY;
     });
   }
 }

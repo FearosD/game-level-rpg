@@ -9,7 +9,8 @@ const gameContainer = document.querySelector('#game');
 const menu = new Menu();
 const setting = new Setting();
 const loader = new Loader();
-const game = new Game({ firstLevel: new Dungeon() });
+const dungeonLevel = new Dungeon();
+const game = new Game({ firstLevel: dungeonLevel, levels: [dungeonLevel] });
 const controller = new Controller({
   menu,
   gameContainer,

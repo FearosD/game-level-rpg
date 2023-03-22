@@ -8,6 +8,7 @@ export default class Game {
 
     this.levels = levels;
     this.firstLevel = firstLevel;
+    this.currentLevel = this.firstLevel;
   }
   createGame() {
     return this.canvas;
@@ -16,5 +17,20 @@ export default class Game {
   startGame() {
     this.firstLevel.createLevel(this.canvas);
     this.firstLevel.startLevel();
+  }
+
+  saveGame() {
+    return this.currentLevel.saveLevel();
+  }
+
+  loadGame(saveData) {
+    const [level] = this.levels.filter(
+      (level) => level.name === saveData.level
+    );
+    this.currentLevel = level;
+
+    this.currentLevel.createLevel(this.canvas);
+    this.currentLevel.startLevel();
+    this.currentLevel.loadLevel(saveData);
   }
 }

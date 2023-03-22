@@ -12,15 +12,18 @@ export default class Controller {
     this.loader = loader;
     this.game = game;
     this.setting = setting;
+    this.tempSave = null;
   }
 
   initGame() {
     this.gameContainer.append(this.menu.createMenu());
     this.gameContainer.append(this.setting.createSetting());
     this.gameContainer.append(this.loader.createLoader());
+
     this.menu.subscribe('game start', this.gameStart.bind(this));
     this.menu.subscribe('game save', this.gameSave.bind(this));
     this.menu.subscribe('game load', this.gameLoad.bind(this));
+
     this.setting.subscribe('toggle sound', this.gameToggleSound.bind(this));
     this.setting.subscribe('toggle setting', this.gameToggleSetting.bind(this));
   }
@@ -42,10 +45,13 @@ export default class Controller {
 
   gameSave() {
     console.warn('Game Save');
+    this.tempSave = this.game.saveGame();
+    console.log(this.tempSave);
   }
 
   gameLoad() {
     console.warn('Game Load');
+    this.game.loadGame(this.tempSave);
   }
 
   gameToggleSound() {

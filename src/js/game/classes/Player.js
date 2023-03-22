@@ -10,8 +10,18 @@ export default class Player extends AnimatedSprite {
     holdFrame = 1,
     animations,
     currentPosition = [1, 1],
+    name,
   }) {
-    super({ position, imageName, ctx, scale, maxFrame, holdFrame, animations });
+    super({
+      position,
+      imageName,
+      ctx,
+      scale,
+      maxFrame,
+      holdFrame,
+      animations,
+      name,
+    });
 
     this.collisionBox = {
       x: this.posX + 24,
