@@ -7,18 +7,18 @@ export default class Menu extends EventEmitter {
     this.gameMenu = gameMenu();
 
     this.startBtn = this.gameMenu.querySelector('#btn-start');
+    this.saveBtn = this.gameMenu.querySelector('#btn-save');
     this.loadBtn = this.gameMenu.querySelector('#btn-load');
-    this.optionsBtn = this.gameMenu.querySelector('#btn-options');
   }
   createMenu() {
     this.startBtn.addEventListener('click', () => {
       this.emit('game start');
     });
+    this.saveBtn.addEventListener('click', () => {
+      this.emit('game save');
+    });
     this.loadBtn.addEventListener('click', () => {
       this.emit('game load');
-    });
-    this.optionsBtn.addEventListener('click', () => {
-      this.emit('game options');
     });
 
     return this.gameMenu;

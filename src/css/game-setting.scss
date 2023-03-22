@@ -1,0 +1,57 @@
+.game__setting {
+  position: absolute;
+  top: -60px;
+  right: 20px;
+  display: flex;
+  & > *:not(:last-child) {
+    margin-right: 12px;
+  }
+  &--slideout {
+    animation-name: settingout;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.18, 0.8, 0.255, 0.96);
+    animation-fill-mode: forwards;
+  }
+  &--slidein {
+    animation-name: settingin;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.18, 0.8, 0.255, 0.96);
+    animation-fill-mode: forwards;
+  }
+}
+
+.game__button-setting {
+  width: 64px;
+  height: 64px;
+
+  &#btn-sound {
+    background-image: url('../assets/images/ui/setting/btn-sound-normal.png');
+
+    &:hover {
+      background-image: url('../assets/images/ui/setting/btn-sound-hover.png');
+    }
+  }
+
+  &#btn-setting {
+    background-image: url('../assets/images/ui/setting/btn-setting-normal.png');
+
+    &:hover {
+      background-image: url('../assets/images/ui/setting/btn-setting-hover.png');
+    }
+  }
+}
+
+@keyframes settingin {
+  to {
+    top: 20px;
+  }
+}
+
+@keyframes settingout {
+  from {
+    top: 20px;
+  }
+  to {
+    top: -60px;
+  }
+}

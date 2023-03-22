@@ -4,6 +4,7 @@ import Sprite from '../classes/Sprite';
 import { gsap } from 'gsap';
 import Pathfinding from 'pathfinding';
 import { parsedDungeonCollisions } from './dungeon-collisions';
+import pathfinding from '../../helpers/pathfinding';
 
 export default class Dungeon {
   constructor() {
@@ -111,64 +112,19 @@ export default class Dungeon {
     this.animate();
 
     const grid = new Pathfinding.Grid(parsedDungeonCollisions);
-
-    this.canvas.addEventListener('click', (event) => {
-      if (!this.canMove) return;
-      this.canMove = false;
-      const posX = event.clientX - this.canvasRect.left;
-      const posY = event.clientY - this.canvasRect.top;
-
-      const gridBackup = grid.clone();
-      const [startX, startY] = this.player.currentPosition;
-      const endX = Math.floor((Math.abs(this.map.posX) + posX) / 48);
-      const endY = Math.floor((Math.abs(this.map.posY) + posY) / 48);
-
-      const finder = new Pathfinding.BestFirstFinder({
-        allowDiagonal: true,
-        dontCrossCorners: true,
-        heuristic: function (dx, dy) {
-          return Math.min(dx, dy);
-        },
-      });
-
-      const path = finder.findPath(startX, startY, endX, endY, gridBackup);
-      if (path.length === 0) {
-        this.canMove = true;
-        return;
-      }
-
-      const keyFramesArray = path.slice(1);
-      const arrayTemp = [];
-      for (let i = 0; i < keyFramesArray.length; i += 1) {
-        arrayTemp.push([
-          keyFramesArray[i][0] - path[i][0],
-          keyFramesArray[i][1] - path[i][1],
-        ]);
-      }
-
-      const keyFrames = arrayTemp.map((points) => {
-        const [x, y] = points;
-        return {
-          posX: `-=${x * 48}`,
-          posY: `-=${y * 48}`,
-          duration: 0.3,
-          onStart: () => {
-            if (x > 0 && y == 0) {
-              this.player.switchState('moveRight');
-            } else if (x < 0 && y == 0) {
-              this.player.switchState('moveLeft');
-            } else if (y < 0) {
-              this.player.switchState('moveUp');
-            } else if (y > 0) {
-              this.player.switchState('moveDown');
-            }
-            // console.log(currentPosition);
-          },
-        };
-      });
-
-      this.moveMap(keyFrames, endX, endY);
+    const pathfindingFunc = pathfinding.bind(this, {
+      event,
+      canMove: this.canMove,
+      canvasRect: this.canvasRect,
+      grid,
+      currentPosition: this.player.currentPosition,
+      player: this.player,
+      map: this.map,
+      moveFunc: this.moveMap,
+      context: this,
     });
+
+    this.canvas.addEventListener('click', pathfindingFunc);
   }
 
   moveMap(keyFrames, endX, endY) {
@@ -180,7 +136,6 @@ export default class Dungeon {
           this.player.currentPosition[1] = endY;
           this.player.switchState('idle');
           this.canMove = true;
-          // console.log(currentPosition);
         },
       });
     });

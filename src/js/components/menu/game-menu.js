@@ -11,17 +11,17 @@ export default function gameMenu() {
     innerElem: 'Load',
     id: 'btn-load',
   });
-  const optionsButton = createElement({
-    classElem: 'game__button',
-    innerElem: 'Options',
-    id: 'btn-options',
+  const saveButton = createElement({
+    classElem: 'game__button disabled',
+    innerElem: 'Save',
+    id: 'btn-save',
   });
   const gameButtons = createElement({ classElem: 'game__buttons' });
   const leftChain = createElement({ classElem: 'left-chain' });
   const rightChain = createElement({ classElem: 'right-chain' });
   const gameMenu = createElement({ classElem: 'game__menu' });
 
-  gameButtons.append(startButton, loadButton, optionsButton);
+  gameButtons.append(startButton, saveButton, loadButton);
   gameMenu.append(leftChain, rightChain, gameButtons);
 
   return gameMenu;

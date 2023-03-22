@@ -1,6 +1,7 @@
 @import 'game';
 @import 'game-menu';
 @import 'game-loader';
+@import 'game-setting';
 // @import 'modal';
 
 @font-face {
@@ -21,4 +22,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+*.disabled {
+  pointer-events: none;
 }
