@@ -1,6 +1,6 @@
 import Pathfinding from 'pathfinding';
 
-export default pathfinding = ({
+const pathfinding = ({
   event,
   canMove,
   canvasRect,
@@ -66,3 +66,5 @@ export default pathfinding = ({
   });
   moveFunc.call(context, keyFrames, endX, endY);
 };
+
+export default pathfinding;
