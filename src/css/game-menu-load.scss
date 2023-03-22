@@ -1,0 +1,42 @@
+.game__load {
+  display: block;
+  width: 448;
+  height: 320;
+  position: absolute;
+  top: 160px;
+  left: 416px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../assets/images/ui/menu/menu-load.png');
+
+  animation-name: slidein;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.425, 1.55, 0.335, 0.545);
+
+  &--slideout {
+    animation-name: slideout;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.18, 0.8, 0.255, 0.96);
+    animation-fill-mode: forwards;
+  }
+
+  .left-chain {
+    bottom: 224px;
+  }
+
+  .right-chain {
+    bottom: 224px;
+  }
+}
+
+.game__load-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}

@@ -64,6 +64,5 @@ export default pathfinding = ({
       },
     };
   });
-
   moveFunc.call(context, keyFrames, endX, endY);
 };

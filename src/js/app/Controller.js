@@ -6,13 +6,25 @@ import {
 } from '../helpers/assets-list';
 
 export default class Controller {
-  constructor({ menu, gameContainer, loader, game, setting }) {
+  constructor({
+    menu,
+    gameContainer,
+    loader,
+    game,
+    setting,
+    saveModel,
+    menuSave,
+    menuLoad,
+  }) {
     this.gameContainer = gameContainer;
     this.menu = menu;
     this.loader = loader;
     this.game = game;
     this.setting = setting;
-    this.tempSave = null;
+    this.menuSave = menuSave;
+    this.menuLoad = menuLoad;
+    this.saveModel = saveModel;
+    // this.tempSave = null;
   }
 
   initGame() {
@@ -26,11 +38,17 @@ export default class Controller {
 
     this.setting.subscribe('toggle sound', this.gameToggleSound.bind(this));
     this.setting.subscribe('toggle setting', this.gameToggleSetting.bind(this));
+
+    this.menuSave.createMenu();
+    this.menuLoad.createMenu();
+
+    this.menuSave.subscribe('game post save', this.gamePostSave.bind(this));
+    this.menuLoad.subscribe('game get save', this.gameGetSave.bind(this));
   }
 
   async gameStart() {
     console.warn('Game Start');
-    this.menu.gameMenu.classList.add('game__menu--slideout');
+    this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.menu.saveBtn.classList.remove('disabled');
     this.loader.gameLoader.style.display = 'block';
     await this.loader.start();
@@ -44,14 +62,53 @@ export default class Controller {
   }
 
   gameSave() {
-    console.warn('Game Save');
-    this.tempSave = this.game.saveGame();
-    console.log(this.tempSave);
+    console.warn('Open save menu');
+    this.menu.gameMenu.classList.toggle('game__menu--slideout');
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.menuSave.gameMenuSave.classList.remove('game__save--slideout');
+    this.gameContainer.append(this.menuSave.gameMenuSave);
+  }
+
+  async gamePostSave() {
+    const saveName = this.menuSave.input.value;
+    if (saveName !== '') {
+      const saveData = this.game.saveGame();
+      await this.saveModel.postSave(saveData, saveName);
+      this.menuSave.gameMenuSave.classList.add('game__save--slideout');
+      this.setting.gameSetting.classList.toggle('disabled');
+      this.game.canvas.classList.toggle('disabled');
+      await setTimeout(() => {
+        this.menuSave.gameMenuSave.remove();
+      }, 1000);
+      console.error('Game Saved');
+    }
   }
 
   gameLoad() {
     console.warn('Game Load');
-    this.game.loadGame(this.tempSave);
+    // this.game.loadGame(this.tempSave);
+    // const { saveData } = await this.saveModel.getSave('random 76');
+    // console.log(saveData);
+    console.warn('Open load menu');
+    this.menu.gameMenu.classList.toggle('game__menu--slideout');
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.menuLoad.gameMenuLoad.classList.remove('game__load--slideout');
+    this.gameContainer.append(this.menuLoad.gameMenuLoad);
+  }
+
+  async gameGetSave() {
+    const saveName = this.menuLoad.input.value;
+    if (saveName !== '') {
+      const save = await this.saveModel.getSave(saveName);
+      if (save !== undefined) this.game.loadGame(save.saveData);
+      this.menuLoad.gameMenuLoad.classList.add('game__load--slideout');
+      this.setting.gameSetting.classList.toggle('disabled');
+      this.game.canvas.classList.toggle('disabled');
+      await setTimeout(() => {
+        this.menuLoad.gameMenuLoad.remove();
+      }, 1000);
+      console.error('Game Loading');
+    }
   }
 
   gameToggleSound() {

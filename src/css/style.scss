@@ -2,6 +2,8 @@
 @import 'game-menu';
 @import 'game-loader';
 @import 'game-setting';
+@import 'game-menu-save';
+@import 'game-menu-load';
 // @import 'modal';
 
 @font-face {
@@ -22,6 +24,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-family: 'Monogram';
+  font-size: 48px;
+  text-align: center;
 }
 
 *.disabled {

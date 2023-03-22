@@ -139,6 +139,7 @@ export default class Dungeon {
   }
 
   moveMap(keyFrames, endX, endY) {
+    this.canMove = false;
     this.levelObject.forEach((object) => {
       gsap.to(object, {
         keyframes: keyFrames,
