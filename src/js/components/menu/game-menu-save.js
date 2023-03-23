@@ -23,6 +23,7 @@ export default function gameMenuSave() {
 
   saveInput.type = 'text';
   saveInput.name = 'save-input';
+  saveInput.autocomplete = 'off';
   saveInput.setAttribute('maxlength', '8');
 
   saveContent.append(saveText, saveInput, saveButton);

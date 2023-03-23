@@ -22,6 +22,7 @@ export default function gameMenuLoad() {
 
   loadInput.type = 'text';
   loadInput.name = 'load-input';
+  loadInput.autocomplete = 'off';
   loadInput.setAttribute('maxlength', '8');
 
   loadContent.append(loadText, loadInput, loadButton);
