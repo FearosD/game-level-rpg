@@ -9,8 +9,10 @@ export default class Game {
     this.levels = levels;
     this.firstLevel = firstLevel;
     this.currentLevel = this.firstLevel;
+    this.gameStart = false;
   }
   createGame() {
+    this.gameStart = true;
     return this.canvas;
   }
 

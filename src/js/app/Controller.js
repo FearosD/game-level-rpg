@@ -56,7 +56,8 @@ export default class Controller {
     // console.log(takeImage('dungeon-map'));
     // console.log(takeSound('Block'));
     this.loader.gameLoader.remove();
-    this.setting.gameSetting.classList.add('game__setting--slidein');
+    this.setting.gameSetting.classList.toggle('game__setting--slidein');
+    this.menu.startBtn.classList.toggle('disabled');
     this.gameContainer.append(this.game.createGame());
     this.game.startGame();
   }
@@ -74,7 +75,7 @@ export default class Controller {
     if (saveName !== '') {
       const saveData = this.game.saveGame();
       await this.saveModel.postSave(saveData, saveName);
-      this.menuSave.gameMenuSave.classList.add('game__save--slideout');
+      this.menuSave.gameMenuSave.classList.toggle('game__save--slideout');
       this.setting.gameSetting.classList.toggle('disabled');
       this.game.canvas.classList.toggle('disabled');
       await setTimeout(() => {
@@ -86,9 +87,6 @@ export default class Controller {
 
   gameLoad() {
     console.warn('Game Load');
-    // this.game.loadGame(this.tempSave);
-    // const { saveData } = await this.saveModel.getSave('random 76');
-    // console.log(saveData);
     console.warn('Open load menu');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.setting.gameSetting.classList.toggle('disabled');
@@ -100,8 +98,28 @@ export default class Controller {
     const saveName = this.menuLoad.input.value;
     if (saveName !== '') {
       const save = await this.saveModel.getSave(saveName);
-      if (save !== undefined) this.game.loadGame(save.saveData);
-      this.menuLoad.gameMenuLoad.classList.add('game__load--slideout');
+      if (save !== undefined) {
+        if (!this.game.gameStart) {
+          console.log(this.game.gameStart);
+          this.menuLoad.gameMenuLoad.classList.toggle('game__load--slideout');
+          this.loader.gameLoader.style.display = 'block';
+          await this.loader.start();
+          this.loader.gameLoader.remove();
+          this.menu.startBtn.classList.toggle('disabled');
+          this.menu.saveBtn.classList.toggle('disabled');
+          this.gameContainer.append(this.game.createGame());
+          this.game.loadGame(save.saveData);
+          this.setting.gameSetting.classList.toggle('game__setting--slidein');
+          this.setting.gameSetting.classList.toggle('disabled');
+          await setTimeout(() => {
+            this.menuLoad.gameMenuLoad.remove();
+          }, 1000);
+          console.error('Game Loading');
+          return;
+        }
+        this.game.loadGame(save.saveData);
+      }
+      this.menuLoad.gameMenuLoad.classList.toggle('game__load--slideout');
       this.setting.gameSetting.classList.toggle('disabled');
       this.game.canvas.classList.toggle('disabled');
       await setTimeout(() => {
