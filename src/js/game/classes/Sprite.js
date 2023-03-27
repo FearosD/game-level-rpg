@@ -1,11 +1,12 @@
 import { takeImage } from '../../helpers/assets-list';
 
 export default class Sprite {
-  constructor({ position, imageName, ctx, scale = 1, name = 'no name' }) {
+  constructor({ position, imageName, canvas, scale = 1, name = 'no name' }) {
     this.posX = position.x;
     this.posY = position.y;
     this.scale = scale;
-    this.ctx = ctx;
+    this.canvas = canvas;
+    this.ctx = this.canvas.getContext('2d');
     this.image = takeImage(imageName);
     this.width = this.image.width;
     this.height = this.image.height;

@@ -5,6 +5,11 @@ import { gsap } from 'gsap';
 import Pathfinding from 'pathfinding';
 import { parsedDungeonCollisions } from './dungeon-collisions';
 import pathfinding from '../../helpers/pathfinding';
+import Npc from '../classes/Npc';
+import {
+  checkInterraction,
+  createInterractionPosition,
+} from '../../helpers/interraction-zone';
 
 export default class Dungeon {
   constructor() {
@@ -16,9 +21,13 @@ export default class Dungeon {
     this.map = null;
     this.levelObject = [];
     this.canMove = true;
-    this.offset = {
+    this.offsetMap = {
       x: -864,
       y: -336,
+    };
+    this.offsetNpc = {
+      x: -24,
+      y: -48,
     };
     this.levelStart = false;
   }
@@ -30,23 +39,23 @@ export default class Dungeon {
 
     this.map = new Sprite({
       position: {
-        x: this.offset.x,
-        y: this.offset.y,
+        x: this.offsetMap.x,
+        y: this.offsetMap.y,
       },
       imageName: 'dungeon-map',
       scale: 1,
-      ctx: this.ctx,
+      canvas: this.canvas,
       name: 'dungeon-map',
     });
 
-    const testNpc = new AnimatedSprite({
-      ctx: this.ctx,
+    const testNpc = new Npc({
+      canvas: this.canvas,
       imageName: 'marchant-idle',
       name: 'test-npc',
       scale: 1.5,
       position: {
-        x: this.canvas.width / 2 - 42 + 48 * 4,
-        y: this.canvas.height / 2 - 24 + 48 * 2,
+        x: 35 * 48 + this.offsetMap.x + this.offsetNpc.x,
+        y: 17 * 48 + this.offsetMap.y + this.offsetNpc.y,
       },
       maxFrame: 4,
       holdFrame: 12,
@@ -60,7 +69,7 @@ export default class Dungeon {
     });
 
     this.player = new Player({
-      ctx: this.ctx,
+      canvas: this.canvas,
       imageName: 'player-idle',
       name: 'player',
       scale: 1.5,
@@ -103,6 +112,9 @@ export default class Dungeon {
     });
 
     this.levelObject.push(this.map, testNpc);
+    this.levelObject.forEach((object) =>
+      createInterractionPosition(object, this.map)
+    );
   }
 
   animate = () => {
@@ -112,7 +124,7 @@ export default class Dungeon {
     this.player.update();
   };
 
-  pathfindingFunc() {
+  pathfindingFunc = () => {
     const grid = new Pathfinding.Grid(parsedDungeonCollisions);
 
     return pathfinding({
@@ -126,13 +138,13 @@ export default class Dungeon {
       moveFunc: this.moveMap,
       context: this,
     });
-  }
+  };
 
   startLevel() {
     if (!this.levelStart) {
       this.animate();
 
-      this.canvas.addEventListener('click', this.pathfindingFunc.bind(this));
+      this.canvas.addEventListener('click', this.pathfindingFunc);
 
       this.levelStart = true;
     }
@@ -148,6 +160,7 @@ export default class Dungeon {
           this.player.currentPosition[1] = endY;
           this.player.switchState('idle');
           this.canMove = true;
+          checkInterraction(this.player, object);
         },
       });
     });

@@ -32,21 +32,21 @@ export default class Controller {
     this.gameContainer.append(this.setting.createSetting());
     this.gameContainer.append(this.loader.createLoader());
 
-    this.menu.subscribe('game start', this.gameStart.bind(this));
-    this.menu.subscribe('game save', this.gameSave.bind(this));
-    this.menu.subscribe('game load', this.gameLoad.bind(this));
+    this.menu.subscribe('game start', this.gameStart);
+    this.menu.subscribe('game save', this.gameSave);
+    this.menu.subscribe('game load', this.gameLoad);
 
-    this.setting.subscribe('toggle sound', this.gameToggleSound.bind(this));
-    this.setting.subscribe('toggle setting', this.gameToggleSetting.bind(this));
+    this.setting.subscribe('toggle sound', this.gameToggleSound);
+    this.setting.subscribe('toggle setting', this.gameToggleSetting);
 
     this.menuSave.createMenu();
     this.menuLoad.createMenu();
 
-    this.menuSave.subscribe('game post save', this.gamePostSave.bind(this));
-    this.menuLoad.subscribe('game get save', this.gameGetSave.bind(this));
+    this.menuSave.subscribe('game post save', this.gamePostSave);
+    this.menuLoad.subscribe('game get save', this.gameGetSave);
   }
 
-  async gameStart() {
+  gameStart = async () => {
     console.warn('Game Start');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.menu.saveBtn.classList.remove('disabled');
@@ -60,17 +60,17 @@ export default class Controller {
     this.menu.startBtn.classList.toggle('disabled');
     this.gameContainer.append(this.game.createGame());
     this.game.startGame();
-  }
+  };
 
-  gameSave() {
+  gameSave = () => {
     console.warn('Open save menu');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.setting.gameSetting.classList.toggle('disabled');
     this.menuSave.gameMenuSave.classList.remove('game__save--slideout');
     this.gameContainer.append(this.menuSave.gameMenuSave);
-  }
+  };
 
-  async gamePostSave() {
+  gamePostSave = async () => {
     const saveName = this.menuSave.input.value;
     if (saveName !== '') {
       const saveData = this.game.saveGame();
@@ -83,18 +83,18 @@ export default class Controller {
       }, 1000);
       console.error('Game Saved');
     }
-  }
+  };
 
-  gameLoad() {
+  gameLoad = () => {
     console.warn('Game Load');
     console.warn('Open load menu');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.setting.gameSetting.classList.toggle('disabled');
     this.menuLoad.gameMenuLoad.classList.remove('game__load--slideout');
     this.gameContainer.append(this.menuLoad.gameMenuLoad);
-  }
+  };
 
-  async gameGetSave() {
+  gameGetSave = async () => {
     const saveName = this.menuLoad.input.value;
     if (saveName !== '') {
       const save = await this.saveModel.getSave(saveName);
@@ -127,15 +127,15 @@ export default class Controller {
       }, 1000);
       console.error('Game Loading');
     }
-  }
+  };
 
-  gameToggleSound() {
+  gameToggleSound = () => {
     console.warn('Toggle Sound');
-  }
+  };
 
-  gameToggleSetting() {
+  gameToggleSetting = () => {
     console.warn('Toggle Setting');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.game.canvas.classList.toggle('disabled');
-  }
+  };
 }

@@ -5,14 +5,14 @@ export default class AnimatedSprite extends Sprite {
   constructor({
     position,
     imageName,
-    ctx,
+    canvas,
     scale,
     maxFrame = 1,
     holdFrame = 1,
     animations,
     name,
   }) {
-    super({ position, imageName, ctx, scale, name });
+    super({ position, imageName, canvas, scale, name });
     this.maxFrame = maxFrame;
     this.currentFrame = 0;
     this.elapseFrame = 0;

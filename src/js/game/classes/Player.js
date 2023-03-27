@@ -4,7 +4,7 @@ export default class Player extends AnimatedSprite {
   constructor({
     position,
     imageName,
-    ctx,
+    canvas,
     scale,
     maxFrame = 1,
     holdFrame = 1,
@@ -15,7 +15,7 @@ export default class Player extends AnimatedSprite {
     super({
       position,
       imageName,
-      ctx,
+      canvas,
       scale,
       maxFrame,
       holdFrame,

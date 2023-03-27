@@ -7,6 +7,7 @@ export const assetsImagesURL = [
   './assets/images/characters/player/player-normal/player-walk-right.png',
   './assets/images/characters/player/player-normal/player-walk-up.png',
   './assets/images/bg.png',
+  './assets/images/characters/sign/talk-sign.png',
 ];
 
 export const assetsSoundURL = [
