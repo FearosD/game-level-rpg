@@ -1,5 +1,6 @@
 const dialogues = {
   benjamin: {
+    npc: 'Benjamin',
     start: {
       name: 'benjamin',
       text: "Hello, traveler. I am the headman of this village. Do you know what's going on here?",

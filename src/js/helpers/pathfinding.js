@@ -11,7 +11,6 @@ const pathfinding = ({
   moveFunc,
   context,
 }) => {
-  console.log(player.saveOptions);
   if (!canMove) return;
   canMove = false;
   event = event || window.event;

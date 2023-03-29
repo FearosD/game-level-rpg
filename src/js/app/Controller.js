@@ -4,6 +4,7 @@ import {
   assetsSounds,
   takeSound,
 } from '../helpers/assets-list';
+import Dialogue from './Dialogue';
 
 export default class Controller {
   constructor({
@@ -24,6 +25,7 @@ export default class Controller {
     this.menuSave = menuSave;
     this.menuLoad = menuLoad;
     this.saveModel = saveModel;
+    this.dialogue = null;
     // this.tempSave = null;
   }
 
@@ -140,8 +142,12 @@ export default class Controller {
     this.game.canvas.classList.toggle('disabled');
   };
 
-  startDialogue = (dialogue) => {
+  startDialogue = (dialogueData) => {
     console.log('start dialogue');
-    console.log(dialogue);
+    const dialogue = new Dialogue(dialogueData);
+    this.dialogue = dialogue;
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.game.canvas.classList.toggle('disabled');
+    this.gameContainer.append(this.dialogue.createDialogue());
   };
 }
