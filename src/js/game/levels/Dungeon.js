@@ -171,31 +171,36 @@ export default class Dungeon extends EventEmitter {
 
   saveLevel() {
     const saveData = {
-      position: { player: { posX: this.player.posX, posY: this.player.posY } },
-      currentPlayerPosition: [...this.player.currentPosition],
       level: this.name,
+      player: {},
     };
 
+    for (let option in this.player.saveOptions) {
+      saveData.player[option] = this.player.saveOptions[option];
+    }
+
     this.levelObject.forEach((object) => {
-      saveData.position[object.name] = {
-        posX: object.posX,
-        posY: object.posY,
-      };
+      saveData[object.name] = {};
+      for (let option in object.saveOptions) {
+        saveData[object.name][option] = object.saveOptions[option];
+      }
     });
     return saveData;
   }
 
   loadLevel(saveData) {
-    this.player.currentPosition = [...saveData.currentPlayerPosition];
-    this.player.posX = saveData.position.player.posX;
-    this.player.posY = saveData.position.player.posY;
+    for (let option in saveData.player) {
+      this.player[option] = saveData.player[option];
+    }
 
-    this.map.posX = saveData.position[this.map.name].posX;
-    this.map.posY = saveData.position[this.map.name].posY;
+    for (let option in saveData[this.map.name]) {
+      this.map[option] = saveData[this.map.name][option];
+    }
 
     this.levelObject.forEach((object) => {
-      object.posX = saveData.position[object.name].posX;
-      object.posY = saveData.position[object.name].posY;
+      for (let option in saveData[object.name]) {
+        object[option] = saveData[object.name][option];
+      }
     });
   }
 

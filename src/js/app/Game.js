@@ -13,7 +13,6 @@ export default class Game extends EventEmitter {
     this.gameStart = false;
   }
   createGame() {
-    this.gameStart = true;
     return this.canvas;
   }
 
@@ -21,6 +20,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.createLevel(this.canvas);
     this.currentLevel.startLevel();
     this.currentLevel.subscribe('dialogue-npc', this.startDialogue);
+    this.gameStart = true;
   }
 
   saveGame() {
@@ -42,7 +42,6 @@ export default class Game extends EventEmitter {
     this.currentLevel.startLevel();
     this.currentLevel.loadLevel(saveData);
     if (!this.gameStart) {
-      console.log('err');
       this.currentLevel.subscribe('dialogue-npc', this.startDialogue);
     }
     this.gameStart = true;

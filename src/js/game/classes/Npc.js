@@ -62,7 +62,15 @@ export default class Npc extends AnimatedSprite {
       mouseY >= this.posY &&
       mouseY <= this.posY + this.height * this.scale
     ) {
-      // this.emit('dialogue-npc', this.dialogue);
+      this.emit('dialogue-npc', this.dialogue);
     }
   };
+
+  get saveOptions() {
+    return {
+      posX: this.posX,
+      posY: this.posY,
+      canInterraction: this.canInterraction,
+    };
+  }
 }

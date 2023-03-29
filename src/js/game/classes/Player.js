@@ -31,6 +31,11 @@ export default class Player extends AnimatedSprite {
     };
 
     this.currentPosition = currentPosition;
+    // this.saveOptions = {
+    //   posX: this.posX,
+    //   posY: this.posY,
+    //   currentPosition: this.currentPosition,
+    // };
   }
 
   draw() {
@@ -44,5 +49,13 @@ export default class Player extends AnimatedSprite {
       this.collisionBox.height
     );
     this.ctx.fill();
+  }
+
+  get saveOptions() {
+    return {
+      posX: this.posX,
+      posY: this.posY,
+      currentPosition: this.currentPosition,
+    };
   }
 }

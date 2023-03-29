@@ -28,4 +28,11 @@ export default class Sprite extends EventEmitter {
   update() {
     this.draw();
   }
+
+  get saveOptions() {
+    return {
+      posX: this.posX,
+      posY: this.posY,
+    };
+  }
 }
