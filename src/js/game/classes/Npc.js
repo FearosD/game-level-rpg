@@ -1,3 +1,4 @@
+import dialogues from '../levels/dialogues';
 import AnimatedSprite from './AnimatedSprite';
 import Sprite from './Sprite';
 
@@ -34,9 +35,11 @@ export default class Npc extends AnimatedSprite {
       canvas: this.canvas,
     });
 
+    this.dialogue = dialogues[this.name];
+
     this.canvasRect = this.canvas.getBoundingClientRect();
 
-    this.canvas.addEventListener('click', this.interractionHanlder.bind(this));
+    this.canvas.addEventListener('click', this.interractionHanlder);
   }
   draw() {
     super.draw();
@@ -49,7 +52,7 @@ export default class Npc extends AnimatedSprite {
     this.interractionSign.posY = this.posY - 12;
   }
 
-  interractionHanlder(event) {
+  interractionHanlder = (event) => {
     if (!this.canInterraction) return;
     const mouseX = event.clientX - this.canvasRect.left;
     const mouseY = event.clientY - this.canvasRect.top;
@@ -59,7 +62,7 @@ export default class Npc extends AnimatedSprite {
       mouseY >= this.posY &&
       mouseY <= this.posY + this.height * this.scale
     ) {
-      console.log('click sign');
+      // this.emit('dialogue-npc', this.dialogue);
     }
-  }
+  };
 }

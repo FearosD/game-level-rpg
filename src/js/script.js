@@ -30,5 +30,5 @@ const controller = new Controller({
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  // controller.initGame();
+  controller.initGame();
 });

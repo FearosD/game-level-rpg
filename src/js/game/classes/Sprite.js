@@ -1,7 +1,9 @@
+import EventEmitter from '../../app/EventEmitter';
 import { takeImage } from '../../helpers/assets-list';
 
-export default class Sprite {
+export default class Sprite extends EventEmitter {
   constructor({ position, imageName, canvas, scale = 1, name = 'no name' }) {
+    super();
     this.posX = position.x;
     this.posY = position.y;
     this.scale = scale;

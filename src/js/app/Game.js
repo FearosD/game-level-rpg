@@ -1,14 +1,15 @@
 import createElement from '../helpers/createElement';
+import EventEmitter from './EventEmitter';
 
-export default class Game {
+export default class Game extends EventEmitter {
   constructor({ levels = [], firstLevel }) {
+    super();
     this.canvas = createElement({ typeElem: 'canvas', id: 'canvas' });
     this.canvas.width = 1280;
     this.canvas.height = 720;
 
     this.levels = levels;
-    this.firstLevel = firstLevel;
-    this.currentLevel = this.firstLevel;
+    this.currentLevel = firstLevel;
     this.gameStart = false;
   }
   createGame() {
@@ -17,8 +18,9 @@ export default class Game {
   }
 
   startGame() {
-    this.firstLevel.createLevel(this.canvas);
-    this.firstLevel.startLevel();
+    this.currentLevel.createLevel(this.canvas);
+    this.currentLevel.startLevel();
+    this.currentLevel.subscribe('dialogue-npc', this.startDialogue);
   }
 
   saveGame() {
@@ -31,8 +33,22 @@ export default class Game {
     );
     this.currentLevel = level;
 
+    if (this.currentLevel.levelStart) {
+      this.currentLevel.loadLevel(saveData);
+      return;
+    }
+
     this.currentLevel.createLevel(this.canvas);
     this.currentLevel.startLevel();
     this.currentLevel.loadLevel(saveData);
+    if (!this.gameStart) {
+      console.log('err');
+      this.currentLevel.subscribe('dialogue-npc', this.startDialogue);
+    }
+    this.gameStart = true;
   }
+
+  startDialogue = (diaologue) => {
+    this.emit('dialogue-npc', diaologue);
+  };
 }

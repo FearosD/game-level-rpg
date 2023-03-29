@@ -1,6 +1,5 @@
 const createInterractionPosition = (object, map) => {
   if (!object.hasOwnProperty('canInterraction')) return;
-  console.log('create interacction');
   let arrayPositions = [];
   for (let x = 0; x <= 2; x += 1) {
     const row = [];

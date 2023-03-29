@@ -44,6 +44,8 @@ export default class Controller {
 
     this.menuSave.subscribe('game post save', this.gamePostSave);
     this.menuLoad.subscribe('game get save', this.gameGetSave);
+
+    this.game.subscribe('dialogue-npc', this.startDialogue);
   }
 
   gameStart = async () => {
@@ -100,7 +102,6 @@ export default class Controller {
       const save = await this.saveModel.getSave(saveName);
       if (save !== undefined) {
         if (!this.game.gameStart) {
-          console.log(this.game.gameStart);
           this.menuLoad.gameMenuLoad.classList.toggle('game__load--slideout');
           this.loader.gameLoader.style.display = 'block';
           await this.loader.start();
@@ -137,5 +138,10 @@ export default class Controller {
     console.warn('Toggle Setting');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.game.canvas.classList.toggle('disabled');
+  };
+
+  startDialogue = (dialogue) => {
+    console.log('start dialogue');
+    console.log(dialogue);
   };
 }

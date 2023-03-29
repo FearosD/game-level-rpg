@@ -10,9 +10,11 @@ import {
   checkInterraction,
   createInterractionPosition,
 } from '../../helpers/interraction-zone';
+import EventEmitter from '../../app/EventEmitter';
 
-export default class Dungeon {
+export default class Dungeon extends EventEmitter {
   constructor() {
+    super();
     this.name = 'Dungeon';
     this.canvas = null;
     this.ctx = null;
@@ -51,7 +53,7 @@ export default class Dungeon {
     const testNpc = new Npc({
       canvas: this.canvas,
       imageName: 'marchant-idle',
-      name: 'test-npc',
+      name: 'benjamin',
       scale: 1.5,
       position: {
         x: 35 * 48 + this.offsetMap.x + this.offsetNpc.x,
@@ -111,10 +113,13 @@ export default class Dungeon {
       },
     });
 
-    this.levelObject.push(this.map, testNpc);
-    this.levelObject.forEach((object) =>
-      createInterractionPosition(object, this.map)
-    );
+    if (!this.levelStart) {
+      testNpc.subscribe('dialogue-npc', this.startDialogue);
+      this.levelObject.push(this.map, testNpc);
+      this.levelObject.forEach((object) =>
+        createInterractionPosition(object, this.map)
+      );
+    }
   }
 
   animate = () => {
@@ -126,7 +131,6 @@ export default class Dungeon {
 
   pathfindingFunc = () => {
     const grid = new Pathfinding.Grid(parsedDungeonCollisions);
-
     return pathfinding({
       event,
       canMove: this.canMove,
@@ -143,7 +147,6 @@ export default class Dungeon {
   startLevel() {
     if (!this.levelStart) {
       this.animate();
-
       this.canvas.addEventListener('click', this.pathfindingFunc);
 
       this.levelStart = true;
@@ -183,14 +186,20 @@ export default class Dungeon {
   }
 
   loadLevel(saveData) {
-    console.log(saveData);
     this.player.currentPosition = [...saveData.currentPlayerPosition];
     this.player.posX = saveData.position.player.posX;
     this.player.posY = saveData.position.player.posY;
+
+    this.map.posX = saveData.position[this.map.name].posX;
+    this.map.posY = saveData.position[this.map.name].posY;
 
     this.levelObject.forEach((object) => {
       object.posX = saveData.position[object.name].posX;
       object.posY = saveData.position[object.name].posY;
     });
   }
+
+  startDialogue = (dialogue) => {
+    this.emit('dialogue-npc', dialogue);
+  };
 }
