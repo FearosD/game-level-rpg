@@ -114,7 +114,7 @@ export default class Dungeon extends EventEmitter {
     });
 
     if (!this.levelStart) {
-      testNpc.subscribe('dialogue-npc', this.startDialogue);
+      testNpc.subscribe('dialogue npc', this.startDialogue);
       this.levelObject.push(this.map, testNpc);
       this.levelObject.forEach((object) =>
         createInterractionPosition(object, this.map)
@@ -205,6 +205,6 @@ export default class Dungeon extends EventEmitter {
   }
 
   startDialogue = (dialogue) => {
-    this.emit('dialogue-npc', dialogue);
+    this.emit('dialogue npc', dialogue);
   };
 }

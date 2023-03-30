@@ -5,7 +5,10 @@ const dialogues = {
       name: 'benjamin',
       text: "Hello, traveler. I am the headman of this village. Do you know what's going on here?",
       next: 'message-1',
-      answers: [],
+      answers: [
+        // { text: 'Test answer 1', next: 'message-1' },
+        // { text: 'Test answer 2', next: 'message-2' },
+      ],
     },
     'message-1': {
       name: 'player',

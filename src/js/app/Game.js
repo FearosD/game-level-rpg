@@ -19,7 +19,7 @@ export default class Game extends EventEmitter {
   startGame() {
     this.currentLevel.createLevel(this.canvas);
     this.currentLevel.startLevel();
-    this.currentLevel.subscribe('dialogue-npc', this.startDialogue);
+    this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.gameStart = true;
   }
 
@@ -42,12 +42,12 @@ export default class Game extends EventEmitter {
     this.currentLevel.startLevel();
     this.currentLevel.loadLevel(saveData);
     if (!this.gameStart) {
-      this.currentLevel.subscribe('dialogue-npc', this.startDialogue);
+      this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     }
     this.gameStart = true;
   }
 
   startDialogue = (diaologue) => {
-    this.emit('dialogue-npc', diaologue);
+    this.emit('dialogue npc', diaologue);
   };
 }

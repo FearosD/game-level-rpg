@@ -1,6 +1,8 @@
 .dialogue {
   position: absolute;
   bottom: 20px;
+  z-index: 10;
+
   // .dialogue__character
 
   &__character {
@@ -81,7 +83,7 @@
 
   &__shape {
     width: 1088px;
-    padding: 52px 64px;
+    padding: 52px 124px 52px 64px;
     background-image: url('../assets/images/ui/dialogue/dlg-shape-top.png'),
       url('../assets/images/ui/dialogue/dlg-shape-bot.png'),
       url('../assets/images/ui/dialogue/dlg-shape-mid.png');

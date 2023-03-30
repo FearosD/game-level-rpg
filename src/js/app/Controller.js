@@ -47,7 +47,7 @@ export default class Controller {
     this.menuSave.subscribe('game post save', this.gamePostSave);
     this.menuLoad.subscribe('game get save', this.gameGetSave);
 
-    this.game.subscribe('dialogue-npc', this.startDialogue);
+    this.game.subscribe('dialogue npc', this.startDialogue);
   }
 
   gameStart = async () => {
@@ -146,8 +146,17 @@ export default class Controller {
     console.log('start dialogue');
     const dialogue = new Dialogue(dialogueData);
     this.dialogue = dialogue;
+    this.dialogue.subscribe('end dialogue', this.endDialogue);
     this.setting.gameSetting.classList.toggle('disabled');
     this.game.canvas.classList.toggle('disabled');
     this.gameContainer.append(this.dialogue.createDialogue());
+  };
+
+  endDialogue = () => {
+    console.log('end dialogue');
+    this.dialogue.remove();
+    this.dialogue = null;
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.game.canvas.classList.toggle('disabled');
   };
 }
