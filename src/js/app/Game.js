@@ -1,3 +1,4 @@
+import Player from '../game/classes/Player';
 import createElement from '../helpers/createElement';
 import EventEmitter from './EventEmitter';
 
@@ -10,14 +11,17 @@ export default class Game extends EventEmitter {
 
     this.levels = levels;
     this.currentLevel = firstLevel;
+    this.player = null;
+
     this.gameStart = false;
   }
   createGame() {
+    this.player = this.createPlayer();
     return this.canvas;
   }
 
   startGame() {
-    this.currentLevel.createLevel(this.canvas);
+    this.currentLevel.createLevel(this.canvas, this.player);
     this.currentLevel.startLevel();
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.gameStart = true;
@@ -38,7 +42,7 @@ export default class Game extends EventEmitter {
       return;
     }
 
-    this.currentLevel.createLevel(this.canvas);
+    this.currentLevel.createLevel(this.canvas, this.player);
     this.currentLevel.startLevel();
     this.currentLevel.loadLevel(saveData);
     if (!this.gameStart) {
@@ -49,5 +53,55 @@ export default class Game extends EventEmitter {
 
   startDialogue = (diaologue) => {
     this.emit('dialogue npc', diaologue);
+  };
+
+  createPlayer = () => {
+    const player = new Player({
+      canvas: this.canvas,
+      imageName: 'player-idle',
+      name: 'player',
+      scale: 1.5,
+      position: {
+        x: this.canvas.width / 2 - 42,
+        y: this.canvas.height / 2 - 24,
+      },
+      maxFrame: 4,
+      holdFrame: 12,
+      currentPosition: [31, 15],
+      animations: {
+        idle: {
+          maxFrame: 4,
+          holdFrame: 12,
+          loop: true,
+          imageName: 'player-idle',
+        },
+        moveDown: {
+          maxFrame: 9,
+          holdFrame: 6,
+          loop: true,
+          imageName: 'player-walk-down',
+        },
+        moveUp: {
+          maxFrame: 9,
+          holdFrame: 6,
+          loop: true,
+          imageName: 'player-walk-up',
+        },
+        moveLeft: {
+          maxFrame: 9,
+          holdFrame: 6,
+          loop: true,
+          imageName: 'player-walk-left',
+        },
+        moveRight: {
+          maxFrame: 9,
+          holdFrame: 6,
+          loop: true,
+          imageName: 'player-walk-right',
+        },
+      },
+    });
+
+    return player;
   };
 }

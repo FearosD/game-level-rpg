@@ -6,6 +6,7 @@ import MenuLoad from './app/MenuLoad';
 import MenuSave from './app/MenuSave';
 import SaveModel from './app/SaveModel';
 import Setting from './app/Setting';
+import Level from './game/classes/Level';
 import Dungeon from './game/levels/Dungeon';
 
 const gameContainer = document.querySelector('#game');
@@ -15,7 +16,11 @@ const menuSave = new MenuSave();
 const menuLoad = new MenuLoad();
 const loader = new Loader();
 const dungeonLevel = new Dungeon();
-const game = new Game({ firstLevel: dungeonLevel, levels: [dungeonLevel] });
+const testLevel = new Level();
+const game = new Game({
+  firstLevel: dungeonLevel,
+  levels: [dungeonLevel, testLevel],
+});
 const saveModel = new SaveModel();
 
 const controller = new Controller({
