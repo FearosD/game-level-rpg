@@ -1,6 +1,8 @@
 export const assetsImagesURL = [
   './assets/images/dungeon/dungeon-map.png',
+  './assets/images/village/village-map.png',
   './assets/images/characters/merchant/marchant-idle.png',
+  './assets/images/characters/benjamin/benjamin-idle.png',
   './assets/images/characters/player/player-normal/player-idle.png',
   './assets/images/characters/player/player-normal/player-walk-down.png',
   './assets/images/characters/player/player-normal/player-walk-left.png',

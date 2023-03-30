@@ -14,13 +14,23 @@ const pathfinding = ({
   if (!canMove) return;
   canMove = false;
   event = event || window.event;
-  const posX = event.clientX - canvasRect.left;
-  const posY = event.clientY - canvasRect.top;
+  const posX =
+    map.posX <= 0
+      ? event.clientX - canvasRect.left
+      : event.clientX - canvasRect.left - map.posX;
+  const posY =
+    map.posY <= 0
+      ? event.clientY - canvasRect.top
+      : event.clientY - canvasRect.top - map.posY;
 
   const gridBackup = grid.clone();
   const [startX, startY] = currentPosition;
-  const endX = Math.floor((Math.abs(map.posX) + posX) / 48);
-  const endY = Math.floor((Math.abs(map.posY) + posY) / 48);
+  const endX = Math.floor(
+    (map.posX <= 0 ? Math.abs(map.posX) + posX : posX) / 48
+  );
+  const endY = Math.floor(
+    (map.posY <= 0 ? Math.abs(map.posY) + posY : posY) / 48
+  );
 
   const finder = new Pathfinding.BestFirstFinder({
     allowDiagonal: true,
@@ -29,7 +39,6 @@ const pathfinding = ({
       return Math.min(dx, dy);
     },
   });
-
   const path = finder.findPath(startX, startY, endX, endY, gridBackup);
   if (path.length === 0) {
     canMove = true;

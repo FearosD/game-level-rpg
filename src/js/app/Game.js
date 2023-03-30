@@ -67,7 +67,7 @@ export default class Game extends EventEmitter {
       },
       maxFrame: 4,
       holdFrame: 12,
-      currentPosition: [31, 15],
+      currentPosition: [0, 0],
       animations: {
         idle: {
           maxFrame: 4,
