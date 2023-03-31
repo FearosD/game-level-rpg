@@ -1,7 +1,10 @@
-import Npc from '../classes/Npc';
-import { createInterractionPosition } from '../../helpers/interraction-zone';
+import {
+  createInterractionPosition,
+  createTransitionZone,
+} from '../../helpers/interraction-zone';
 import Level from '../classes/Level';
 import { parsedVillageCollisions } from './village-collisions';
+import createNpc from '../../helpers/create-npc';
 
 export default class Village extends Level {
   constructor() {
@@ -9,79 +12,60 @@ export default class Village extends Level {
     this.name = 'Village';
     this.nameMap = 'village-map';
     this.collisions = parsedVillageCollisions;
-    this.offsetMap = {
-      x: 0,
-      y: -(25 * 48),
-    };
     this.offsetNpc = {
       x: -24,
       y: -48,
     };
     this.levelStart = false;
-    this.startPosition = [13, 33];
+    // this.interractionPositions = createTransitionZone([
+    //   [18, 30],
+    //   [20, 33],
+    // ]);
+    this.interractionPositions = createTransitionZone([
+      [43, 8],
+      [56, 9],
+    ]);
+  }
+
+  get offsetMap() {
+    return {
+      x: this.isChangeLevel ? -(36 * 48) : 0,
+      y: this.isChangeLevel ? -(2 * 48) : -(25 * 48),
+    };
+  }
+
+  get startPosition() {
+    return this.isChangeLevel ? [49, 10] : [13, 33];
   }
 
   createOjbects(player) {
     this.player = player;
     this.player.currentPosition = [...this.startPosition];
 
-    const benjamin = new Npc({
+    const benjamin = createNpc({
       canvas: this.canvas,
-      imageName: 'benjamin-idle',
       name: 'benjamin',
-      scale: 1.5,
       position: {
         x: 24 * 48 + this.offsetMap.x + this.offsetNpc.x,
         y: 32 * 48 + this.offsetMap.y + this.offsetNpc.y,
       },
-      maxFrame: 4,
-      holdFrame: 12,
-      animations: {
-        idle: {
-          maxFrame: 4,
-          holdFrame: 12,
-          imageName: 'benjamin-idle',
-        },
-      },
     });
 
-    const merchant = new Npc({
+    const merchant = createNpc({
       canvas: this.canvas,
-      imageName: 'marchant-idle',
       name: 'merchant',
-      scale: 1.5,
       position: {
         x: 14 * 48 + this.offsetMap.x + this.offsetNpc.x,
         y: 19 * 48 + this.offsetMap.y + this.offsetNpc.y,
       },
-      maxFrame: 4,
-      holdFrame: 12,
-      animations: {
-        idle: {
-          maxFrame: 4,
-          holdFrame: 12,
-          imageName: 'marchant-idle',
-        },
-      },
     });
 
-    const eleni = new Npc({
+    const eleni = createNpc({
       canvas: this.canvas,
-      imageName: 'eleni-idle',
       name: 'eleni',
-      scale: 1.5,
       position: {
         x: 25 * 48 + this.offsetMap.x + this.offsetNpc.x,
         y: 51 * 48 + this.offsetMap.y + this.offsetNpc.y,
-      },
-      maxFrame: 4,
-      holdFrame: 12,
-      animations: {
-        idle: {
-          maxFrame: 4,
-          holdFrame: 12,
-          imageName: 'eleni-idle',
-        },
       },
     });
 
@@ -110,6 +94,13 @@ export default class Village extends Level {
     this.ctx.fill();
     this.levelObject.forEach((object) => object.update());
     this.player.update();
+    if (this.canInterraction) this.onTransitionZone();
+  };
+
+  onTransitionZone = () => {
+    console.log('can transition dungeon');
+    this.canInterraction = false;
+    this.emit('transition level', 'Dungeon');
   };
 
   offLoadLevel() {

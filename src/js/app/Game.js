@@ -24,6 +24,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.createLevel(this.canvas, this.player);
     this.currentLevel.startLevel();
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
+    this.currentLevel.subscribe('transition level', this.transition);
     this.gameStart = true;
   }
 
@@ -39,6 +40,7 @@ export default class Game extends EventEmitter {
       console.log(`off ${this.currentLevel.name}`);
       this.currentLevel.offLoadLevel();
       this.currentLevel.unsubscribe('dialogue npc', this.startDialogue);
+      this.currentLevel.unsubscribe('transition level', this.transition);
     }
     this.currentLevel = level;
 
@@ -51,14 +53,34 @@ export default class Game extends EventEmitter {
     this.currentLevel.startLevel();
     this.currentLevel.loadLevel(saveData);
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
+    this.currentLevel.subscribe('transition level', this.transition);
     if (!this.gameStart) {
       this.currentLevel.subscribe('dialogue npc', this.startDialogue);
+      this.currentLevel.subscribe('transition level', this.transition);
     }
     this.gameStart = true;
   }
 
+  changeLevel(name) {
+    const [level] = this.levels.filter((level) => level.name === name);
+    this.currentLevel.offLoadLevel();
+    this.currentLevel.unsubscribe('dialogue npc', this.startDialogue);
+    this.currentLevel.unsubscribe('transition level', this.transition);
+    this.currentLevel = level;
+    this.currentLevel.isChangeLevel = true;
+    this.currentLevel.createLevel(this.canvas, this.player);
+    this.currentLevel.isChangeLevel = false;
+    this.currentLevel.startLevel();
+    this.currentLevel.subscribe('dialogue npc', this.startDialogue);
+    this.currentLevel.subscribe('transition level', this.transition);
+  }
+
   startDialogue = (diaologue) => {
     this.emit('dialogue npc', diaologue);
+  };
+
+  transition = (name) => {
+    this.emit('transition level', name);
   };
 
   createPlayer = () => {

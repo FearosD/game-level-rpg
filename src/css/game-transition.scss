@@ -1,0 +1,46 @@
+.game__transition {
+  display: block;
+  width: 576px;
+  height: 320px;
+  position: absolute;
+  top: 160px;
+  left: 352px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../assets/images/ui/menu/menu-transition.png');
+
+  animation-name: slidein;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.425, 1.55, 0.335, 0.545);
+
+  &--slideout {
+    animation-name: slideout;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.18, 0.8, 0.255, 0.96);
+    animation-fill-mode: forwards;
+  }
+
+  z-index: 10;
+
+  .game__buttons {
+    flex-direction: row;
+
+    & > *:not(:last-child) {
+      margin-right: 66px;
+    }
+  }
+
+  .left-chain {
+    bottom: 224px;
+  }
+
+  .right-chain {
+    bottom: 224px;
+  }
+
+  &-content span {
+    display: block;
+    margin-bottom: 54px;
+  }
+}

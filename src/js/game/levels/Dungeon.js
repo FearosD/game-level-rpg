@@ -1,6 +1,9 @@
 import { parsedDungeonCollisions } from './dungeon-collisions';
 import Npc from '../classes/Npc';
-import { createInterractionPosition } from '../../helpers/interraction-zone';
+import {
+  createInterractionPosition,
+  createTransitionZone,
+} from '../../helpers/interraction-zone';
 import Level from '../classes/Level';
 
 export default class Dungeon extends Level {
@@ -9,16 +12,31 @@ export default class Dungeon extends Level {
     this.name = 'Dungeon';
     this.nameMap = 'dungeon-map';
     this.collisions = parsedDungeonCollisions;
-    this.offsetMap = {
-      x: -864,
-      y: -336,
-    };
+    // this.offsetMap = {
+    //   x: -864,
+    //   y: -336,
+    // };
     this.offsetNpc = {
       x: -24,
       y: -48,
     };
     this.levelStart = false;
-    this.startPosition = [31, 15];
+    this.interractionPositions = createTransitionZone([
+      [31, 15],
+      [32, 15],
+    ]);
+    // this.startPosition = [31, 15];
+  }
+
+  get offsetMap() {
+    return {
+      x: this.isChangeLevel ? -(18 * 48) : -(18 * 48),
+      y: this.isChangeLevel ? -(9 * 48) : -(9 * 48),
+    };
+  }
+
+  get startPosition() {
+    return this.isChangeLevel ? [31, 17] : [31, 17];
   }
 
   createOjbects(player) {
@@ -54,6 +72,17 @@ export default class Dungeon extends Level {
       );
     }
   }
+
+  animate = () => {
+    super.animate();
+    if (this.canInterraction) this.onTransitionZone();
+  };
+
+  onTransitionZone = () => {
+    console.log('can transition village');
+    this.canInterraction = false;
+    this.emit('transition level', 'Village');
+  };
 
   startDialogue = (dialogue) => {
     this.emit('dialogue npc', dialogue);

@@ -5,6 +5,7 @@ import {
   takeSound,
 } from '../helpers/assets-list';
 import Dialogue from './Dialogue';
+import MenuTransition from './MenuTransition';
 
 export default class Controller {
   constructor({
@@ -26,6 +27,7 @@ export default class Controller {
     this.menuLoad = menuLoad;
     this.saveModel = saveModel;
     this.dialogue = null;
+    this.transition = null;
     // this.tempSave = null;
   }
 
@@ -47,6 +49,7 @@ export default class Controller {
     this.menuSave.subscribe('game post save', this.gamePostSave);
     this.menuLoad.subscribe('game get save', this.gameGetSave);
     this.game.subscribe('dialogue npc', this.startDialogue);
+    this.game.subscribe('transition level', this.startTransition);
   }
 
   gameStart = async () => {
@@ -133,6 +136,7 @@ export default class Controller {
   gameToggleSound = () => {
     console.warn('Toggle Sound');
     // this.game.currentLevel.offLoadLevel();
+    this.game.changeLevel('Village');
   };
 
   gameToggleSetting = () => {
@@ -155,6 +159,36 @@ export default class Controller {
     console.log('end dialogue');
     this.dialogue.remove();
     this.dialogue = null;
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.game.canvas.classList.toggle('disabled');
+  };
+
+  startTransition = (name) => {
+    console.log('start transition');
+    const transition = new MenuTransition(name);
+    this.transition = transition;
+    this.transition.subscribe('accept transition', this.goTransition);
+    this.transition.subscribe('cancel transition', this.endTransition);
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.game.canvas.classList.toggle('disabled');
+    this.gameContainer.append(this.transition.createTransition());
+  };
+
+  goTransition = async (target) => {
+    console.log(`go transition ${target}`);
+    this.transition.gameTransition.classList.add('game__transition--slideout');
+    await this.transition.remove();
+    this.transition = null;
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.game.canvas.classList.toggle('disabled');
+    this.game.changeLevel(target);
+  };
+
+  endTransition = async () => {
+    console.log('cancel transition');
+    this.transition.gameTransition.classList.add('game__transition--slideout');
+    await this.transition.remove();
+    this.transition = null;
     this.setting.gameSetting.classList.toggle('disabled');
     this.game.canvas.classList.toggle('disabled');
   };

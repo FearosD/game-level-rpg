@@ -22,13 +22,19 @@ export default class Level extends EventEmitter {
     this.levelObject = [];
     this.canMove = true;
     this.collisions = parsedDungeonCollisions;
-    this.offsetMap = {
+    this.levelStart = false;
+    this.gameLoop = null;
+    this.isChangeLevel = false;
+    this.npc = [];
+    this.canInterraction = false;
+    this.interractionPositions = [];
+  }
+
+  get offsetMap() {
+    return {
       x: -864,
       y: -336,
     };
-    this.levelStart = false;
-    this.gameLoop = null;
-    this.npc = [];
   }
 
   createLevel(canvas, player) {
@@ -61,12 +67,12 @@ export default class Level extends EventEmitter {
     }
   }
 
-  animate = () => {
+  animate() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.levelObject.forEach((object) => object.update());
     this.player.update();
     this.gameLoop = requestAnimationFrame(this.animate);
-  };
+  }
 
   pathfindingFunc = () => {
     const grid = new Pathfinding.Grid(this.collisions);
@@ -103,6 +109,7 @@ export default class Level extends EventEmitter {
           this.player.switchState('idle');
           this.canMove = true;
           checkInterraction(this.player, object);
+          checkInterraction(this.player, this);
         },
       });
     });

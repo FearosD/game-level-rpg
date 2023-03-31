@@ -31,4 +31,20 @@ const checkInterraction = (player, object) => {
   }
 };
 
-export { checkInterraction, createInterractionPosition };
+const createTransitionZone = ([beginPosition, endPosition]) => {
+  const [beginX, beginY] = beginPosition;
+  const [endX, endY] = endPosition;
+  let arrayPositions = [];
+  for (let x = beginX; x <= endX; x += 1) {
+    const row = [];
+    for (let y = beginY; y <= endY; y += 1) {
+      const position = [x, y];
+      row.push(position);
+    }
+    arrayPositions.push(row);
+  }
+  arrayPositions = arrayPositions.flat(1);
+  return arrayPositions;
+};
+
+export { checkInterraction, createInterractionPosition, createTransitionZone };
