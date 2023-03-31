@@ -4,6 +4,7 @@ node_modules/
 # Кэш
 .cache/
 .parcel-cache/
+.VSCodeCounter/
 
 # Игнорировать каталог coverage 
 coverage
