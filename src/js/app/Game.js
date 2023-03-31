@@ -25,6 +25,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.startLevel();
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.currentLevel.subscribe('transition level', this.transition);
+    this.currentLevel.subscribe('end move to dungeon', this.switcthToDungeon);
     this.gameStart = true;
   }
 
@@ -41,6 +42,10 @@ export default class Game extends EventEmitter {
       this.currentLevel.offLoadLevel();
       this.currentLevel.unsubscribe('dialogue npc', this.startDialogue);
       this.currentLevel.unsubscribe('transition level', this.transition);
+      this.currentLevel.unsubscribe(
+        'end move to dungeon',
+        this.switcthToDungeon
+      );
     }
     this.currentLevel = level;
 
@@ -54,10 +59,12 @@ export default class Game extends EventEmitter {
     this.currentLevel.loadLevel(saveData);
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.currentLevel.subscribe('transition level', this.transition);
-    if (!this.gameStart) {
-      this.currentLevel.subscribe('dialogue npc', this.startDialogue);
-      this.currentLevel.subscribe('transition level', this.transition);
-    }
+    this.currentLevel.subscribe('end move to dungeon', this.switcthToDungeon);
+    // if (!this.gameStart) {
+    //   this.currentLevel.subscribe('dialogue npc', this.startDialogue);
+    //   this.currentLevel.subscribe('transition level', this.transition);
+    //   this.currentLevel.subscribe('end move to dungeon', this.switcthToDungeon);
+    // }
     this.gameStart = true;
   }
 
@@ -66,6 +73,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.offLoadLevel();
     this.currentLevel.unsubscribe('dialogue npc', this.startDialogue);
     this.currentLevel.unsubscribe('transition level', this.transition);
+    this.currentLevel.unsubscribe('end move to dungeon', this.switcthToDungeon);
     this.currentLevel = level;
     this.currentLevel.isChangeLevel = true;
     this.currentLevel.createLevel(this.canvas, this.player);
@@ -73,7 +81,15 @@ export default class Game extends EventEmitter {
     this.currentLevel.startLevel();
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.currentLevel.subscribe('transition level', this.transition);
+    this.currentLevel.subscribe('end move to dungeon', this.switcthToDungeon);
   }
+
+  switcthToDungeon = () => {
+    this.player.posX = this.player.defaultPosition.posX;
+    this.player.posY = this.player.defaultPosition.posY;
+    this.player.switchState('idle');
+    this.changeLevel('Dungeon');
+  };
 
   startDialogue = (diaologue) => {
     this.emit('dialogue npc', diaologue);

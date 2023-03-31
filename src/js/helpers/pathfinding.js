@@ -23,7 +23,6 @@ const pathfinding = ({
       ? event.clientY - canvasRect.top
       : event.clientY - canvasRect.top - map.posY;
 
-  const gridBackup = grid.clone();
   const [startX, startY] = currentPosition;
   const endX = Math.floor(
     (map.posX <= 0 ? Math.abs(map.posX) + posX : posX) / 48
@@ -32,6 +31,19 @@ const pathfinding = ({
     (map.posY <= 0 ? Math.abs(map.posY) + posY : posY) / 48
   );
 
+  const path = createPath(startX, startY, endX, endY, grid);
+  if (path.length === 0) {
+    canMove = true;
+    return;
+  }
+
+  const keyFrames = createKeyFrames(path, player);
+
+  moveFunc.call(context, keyFrames, endX, endY);
+};
+
+const createPath = (startX, startY, endX, endY, grid) => {
+  const gridBackup = grid.clone();
   const finder = new Pathfinding.BestFirstFinder({
     allowDiagonal: true,
     dontCrossCorners: true,
@@ -40,11 +52,10 @@ const pathfinding = ({
     },
   });
   const path = finder.findPath(startX, startY, endX, endY, gridBackup);
-  if (path.length === 0) {
-    canMove = true;
-    return;
-  }
+  return path;
+};
 
+const createKeyFrames = (path, player) => {
   const keyFramesArray = path.slice(1);
   const arrayTemp = [];
   for (let i = 0; i < keyFramesArray.length; i += 1) {
@@ -73,7 +84,8 @@ const pathfinding = ({
       },
     };
   });
-  moveFunc.call(context, keyFrames, endX, endY);
+
+  return keyFrames;
 };
 
-export default pathfinding;
+export { pathfinding, createKeyFrames, createPath };

@@ -4,6 +4,7 @@ import {
   assetsSounds,
   takeSound,
 } from '../helpers/assets-list';
+import { moveToDungeon } from '../helpers/cut-scenes';
 import Dialogue from './Dialogue';
 import MenuTransition from './MenuTransition';
 
@@ -136,7 +137,8 @@ export default class Controller {
   gameToggleSound = () => {
     console.warn('Toggle Sound');
     // this.game.currentLevel.offLoadLevel();
-    this.game.changeLevel('Village');
+    // this.game.changeLevel('Village');
+    moveToDungeon(this.game.currentLevel);
   };
 
   gameToggleSetting = () => {
@@ -181,7 +183,9 @@ export default class Controller {
     this.transition = null;
     this.setting.gameSetting.classList.toggle('disabled');
     this.game.canvas.classList.toggle('disabled');
-    this.game.changeLevel(target);
+    target === 'Dungeon' && this.game.currentLevel.name === 'Village'
+      ? moveToDungeon(this.game.currentLevel)
+      : this.game.changeLevel(target);
   };
 
   endTransition = async () => {

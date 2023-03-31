@@ -98,9 +98,14 @@ export default class Village extends Level {
   };
 
   onTransitionZone = () => {
+    if (this.runCutScene) return;
     console.log('can transition dungeon');
     this.canInterraction = false;
     this.emit('transition level', 'Dungeon');
+  };
+
+  endMoveToDungeon = () => {
+    this.emit('end move to dungeon');
   };
 
   offLoadLevel() {

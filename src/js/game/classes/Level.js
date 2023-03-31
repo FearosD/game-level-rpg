@@ -1,7 +1,7 @@
 import Sprite from '../classes/Sprite';
 import { gsap } from 'gsap';
 import Pathfinding from 'pathfinding';
-import pathfinding from '../../helpers/pathfinding';
+import { pathfinding } from '../../helpers/pathfinding';
 import {
   checkInterraction,
   createInterractionPosition,
@@ -35,6 +35,10 @@ export default class Level extends EventEmitter {
       x: -864,
       y: -336,
     };
+  }
+
+  get grid() {
+    return new Pathfinding.Grid(this.collisions);
   }
 
   createLevel(canvas, player) {
@@ -75,12 +79,11 @@ export default class Level extends EventEmitter {
   }
 
   pathfindingFunc = () => {
-    const grid = new Pathfinding.Grid(this.collisions);
     return pathfinding({
       event,
       canMove: this.canMove,
       canvasRect: this.canvasRect,
-      grid,
+      grid: this.grid,
       currentPosition: this.player.currentPosition,
       player: this.player,
       map: this.map,
@@ -100,7 +103,7 @@ export default class Level extends EventEmitter {
 
   moveMap(keyFrames, endX, endY) {
     this.canMove = false;
-    this.levelObject.forEach((object) => {
+    this.levelObject.forEach(async (object) => {
       gsap.to(object, {
         keyframes: keyFrames,
         onComplete: () => {
