@@ -46,7 +46,6 @@ export default class Controller {
 
     this.menuSave.subscribe('game post save', this.gamePostSave);
     this.menuLoad.subscribe('game get save', this.gameGetSave);
-
     this.game.subscribe('dialogue npc', this.startDialogue);
   }
 
@@ -90,7 +89,6 @@ export default class Controller {
   };
 
   gameLoad = () => {
-    console.warn('Game Load');
     console.warn('Open load menu');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.setting.gameSetting.classList.toggle('disabled');
@@ -134,7 +132,7 @@ export default class Controller {
 
   gameToggleSound = () => {
     console.warn('Toggle Sound');
-    this.game.currentLevel.offLoadLevel();
+    // this.game.currentLevel.offLoadLevel();
   };
 
   gameToggleSetting = () => {

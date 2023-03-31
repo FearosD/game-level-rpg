@@ -28,6 +28,7 @@ export default class Level extends EventEmitter {
     };
     this.levelStart = false;
     this.gameLoop = null;
+    this.npc = [];
   }
 
   createLevel(canvas, player) {
@@ -146,5 +147,9 @@ export default class Level extends EventEmitter {
     cancelAnimationFrame(this.gameLoop);
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.levelStart = false;
+    this.player = null;
+    this.map = null;
+    this.levelObject = [];
+    this.canvas.removeEventListener('click', this.pathfindingFunc);
   }
 }

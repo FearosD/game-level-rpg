@@ -62,8 +62,12 @@ export default class Npc extends AnimatedSprite {
       mouseY >= this.posY &&
       mouseY <= this.posY + this.height * this.scale
     ) {
-      this.emit('dialogue npc', this.dialogue);
+      this.emit(`dialogue ${this.name}`, this.dialogue);
     }
+  };
+
+  removeInterraction = () => {
+    this.canvas.removeEventListener('click', this.interractionHanlder);
   };
 
   get saveOptions() {

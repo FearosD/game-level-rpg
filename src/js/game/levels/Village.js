@@ -86,14 +86,15 @@ export default class Village extends Level {
     });
 
     if (!this.levelStart) {
-      benjamin.subscribe('dialogue npc', this.startDialogue);
-      merchant.subscribe('dialogue npc', this.startDialogue);
-      eleni.subscribe('dialogue npc', this.startDialogue);
-      this.levelObject.push(this.map, benjamin, merchant, eleni);
+      this.npc.push(benjamin, merchant, eleni);
+      this.levelObject.push(this.map, ...this.npc);
       this.levelObject.forEach((object) =>
         createInterractionPosition(object, this.map)
       );
     }
+    this.npc.forEach((npc) => {
+      npc.subscribe(`dialogue ${npc.name}`, this.startDialogue);
+    });
   }
 
   startDialogue = (dialogue) => {
@@ -110,4 +111,13 @@ export default class Village extends Level {
     this.levelObject.forEach((object) => object.update());
     this.player.update();
   };
+
+  offLoadLevel() {
+    super.offLoadLevel();
+    this.npc.forEach((npc) => {
+      npc.unsubscribe(`dialogue ${npc.name}`, this.startDialogue);
+      npc.removeInterraction();
+    });
+    this.npc = [];
+  }
 }

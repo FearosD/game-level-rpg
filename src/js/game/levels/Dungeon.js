@@ -25,29 +25,30 @@ export default class Dungeon extends Level {
     this.player = player;
     this.player.currentPosition = [...this.startPosition];
 
-    const testNpc = new Npc({
-      canvas: this.canvas,
-      imageName: 'marchant-idle',
-      name: 'benjamin',
-      scale: 1.5,
-      position: {
-        x: 35 * 48 + this.offsetMap.x + this.offsetNpc.x,
-        y: 17 * 48 + this.offsetMap.y + this.offsetNpc.y,
-      },
-      maxFrame: 4,
-      holdFrame: 12,
-      animations: {
-        idle: {
-          maxFrame: 4,
-          holdFrame: 12,
-          imageName: 'marchant-idle',
-        },
-      },
-    });
+    // const testNpc = new Npc({
+    //   canvas: this.canvas,
+    //   imageName: 'marchant-idle',
+    //   name: 'benjamin2',
+    //   scale: 1.5,
+    //   position: {
+    //     x: 35 * 48 + this.offsetMap.x + this.offsetNpc.x,
+    //     y: 17 * 48 + this.offsetMap.y + this.offsetNpc.y,
+    //   },
+    //   maxFrame: 4,
+    //   holdFrame: 12,
+    //   animations: {
+    //     idle: {
+    //       maxFrame: 4,
+    //       holdFrame: 12,
+    //       imageName: 'marchant-idle',
+    //     },
+    //   },
+    // });
 
     if (!this.levelStart) {
-      testNpc.subscribe('dialogue npc', this.startDialogue);
-      this.levelObject.push(this.map, testNpc);
+      // testNpc.subscribe('dialogue npc', this.startDialogue);
+      // this.npc.push(testNpc);
+      this.levelObject.push(this.map, ...this.npc);
       this.levelObject.forEach((object) =>
         createInterractionPosition(object, this.map)
       );
@@ -57,4 +58,13 @@ export default class Dungeon extends Level {
   startDialogue = (dialogue) => {
     this.emit('dialogue npc', dialogue);
   };
+
+  offLoadLevel() {
+    super.offLoadLevel();
+    // this.npc.forEach((npc) => {
+    //   npc.unsubscribe(`dialogue ${npc.name}`, this.startDialogue);
+    //   npc.removeInterraction();
+    // });
+    // this.npc = [];
+  }
 }

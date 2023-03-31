@@ -35,8 +35,10 @@ export default class Game extends EventEmitter {
     const [level] = this.levels.filter(
       (level) => level.name === saveData.level
     );
-    if (this.currentLevel.name !== level && this.currentLevel.levelStart) {
+    if (this.currentLevel.name !== level.name && this.currentLevel.levelStart) {
+      console.log(`off ${this.currentLevel.name}`);
       this.currentLevel.offLoadLevel();
+      this.currentLevel.unsubscribe('dialogue npc', this.startDialogue);
     }
     this.currentLevel = level;
 
@@ -48,6 +50,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.createLevel(this.canvas, this.player);
     this.currentLevel.startLevel();
     this.currentLevel.loadLevel(saveData);
+    this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     if (!this.gameStart) {
       this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     }
