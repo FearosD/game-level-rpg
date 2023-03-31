@@ -14,7 +14,7 @@ export default function dialogueUI() {
   const diaologueAvatarNpc = createElement({ classElem: 'dialogue__avatar' });
   const diaologueNamePlayer = createElement({
     classElem: 'dialogue__name',
-    innerElem: 'Player',
+    innerElem: 'Kris',
   });
   const diaologueNameNpc = createElement({
     classElem: 'dialogue__name',

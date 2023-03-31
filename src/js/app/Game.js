@@ -35,6 +35,9 @@ export default class Game extends EventEmitter {
     const [level] = this.levels.filter(
       (level) => level.name === saveData.level
     );
+    if (this.currentLevel.name !== level && this.currentLevel.levelStart) {
+      this.currentLevel.offLoadLevel();
+    }
     this.currentLevel = level;
 
     if (this.currentLevel.levelStart) {

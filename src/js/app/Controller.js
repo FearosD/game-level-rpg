@@ -134,6 +134,7 @@ export default class Controller {
 
   gameToggleSound = () => {
     console.warn('Toggle Sound');
+    this.game.currentLevel.offLoadLevel();
   };
 
   gameToggleSetting = () => {

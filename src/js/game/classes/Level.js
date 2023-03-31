@@ -27,6 +27,7 @@ export default class Level extends EventEmitter {
       y: -336,
     };
     this.levelStart = false;
+    this.gameLoop = null;
   }
 
   createLevel(canvas, player) {
@@ -60,10 +61,10 @@ export default class Level extends EventEmitter {
   }
 
   animate = () => {
-    requestAnimationFrame(this.animate);
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.levelObject.forEach((object) => object.update());
     this.player.update();
+    this.gameLoop = requestAnimationFrame(this.animate);
   };
 
   pathfindingFunc = () => {
@@ -139,5 +140,11 @@ export default class Level extends EventEmitter {
         object[option] = saveData[object.name][option];
       }
     });
+  }
+
+  offLoadLevel() {
+    cancelAnimationFrame(this.gameLoop);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.levelStart = false;
   }
 }

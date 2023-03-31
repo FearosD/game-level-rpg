@@ -22,7 +22,7 @@
       .dialogue__avatar {
         width: 200px;
         height: 200px;
-        background-image: url('../assets/images/ui/dialogue/player-avatar.png');
+        background-image: url('../assets/images/characters/player/player-avatar.png');
       }
 
       .dialogue__name {
@@ -34,7 +34,7 @@
       right: -42px;
 
       .dialogue__avatar {
-        background-image: url('../assets/images/ui/dialogue/player-avatar.png');
+        background-image: url('../assets/images/characters/player/player-avatar.png');
       }
 
       .dialogue__name {
@@ -52,7 +52,19 @@
 
     &--Benjamin {
       .dialogue__avatar {
-        background-image: url('../assets/images/ui/dialogue/npc-benjamin-avatar.png');
+        background-image: url('../assets/images/characters/benjamin/benjamin-avatar.png');
+      }
+    }
+
+    &--Merchant {
+      .dialogue__avatar {
+        background-image: url('../assets/images/characters/merchant/merchant-avatar.png');
+      }
+    }
+
+    &--Eleni {
+      .dialogue__avatar {
+        background-image: url('../assets/images/characters/eleni/eleni-avatar.png');
       }
     }
   }
@@ -84,7 +96,7 @@
 
   &__shape {
     width: 1088px;
-    padding: 52px 124px 52px 64px;
+    padding: 52px 64px;
     background-image: url('../assets/images/ui/dialogue/dlg-shape-top.png'),
       url('../assets/images/ui/dialogue/dlg-shape-bot.png'),
       url('../assets/images/ui/dialogue/dlg-shape-mid.png');
@@ -98,9 +110,10 @@
 
   &__text {
     text-align: left;
+    margin-bottom: 12px;
 
-    &:not(:last-child) {
-      margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 64px;
     }
 
     &--answer {
@@ -121,7 +134,7 @@
   &__btn {
     position: absolute;
     bottom: 24px;
-    right: 32px;
+    left: 54px;
     width: 64px;
     height: 64px;
     background-image: url('../assets/images/ui/dialogue/btn-nxt-n.png');

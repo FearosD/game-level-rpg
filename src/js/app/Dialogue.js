@@ -23,7 +23,6 @@ export default class Dialogue extends EventEmitter {
   }
 
   createDialogue() {
-    console.log(this.dialogueData);
     const nameNpc = this.dialogueData.npc;
     this.npcCharacter.classList.add(`dialogue__character--${nameNpc}`);
     this.npcName.textContent = nameNpc;
@@ -44,14 +43,12 @@ export default class Dialogue extends EventEmitter {
   activeNextBtn(nextMsg) {
     this.nextBtn.classList.remove('disabled');
     this.nextBtn.addEventListener('click', () => {
-      console.log(this.dialogueData[nextMsg]);
       this.goNextMessage(nextMsg);
     });
   }
 
   activeAnswers(answers) {
     this.nextBtn.classList.add('disabled');
-    console.log(answers);
     answers.forEach((answer) => this.createAnswer(answer));
   }
 
@@ -62,7 +59,6 @@ export default class Dialogue extends EventEmitter {
     });
     this.dialogueShape.append(answerElem);
     answerElem.addEventListener('click', () => {
-      console.log(this.dialogueData[answer.next]);
       this.goNextMessage(answer.next);
     });
   }
@@ -82,7 +78,6 @@ export default class Dialogue extends EventEmitter {
       : this.switchPlayerAvatarOff();
     this.dialogueMsg.textContent = text;
     const hasAnswer = answers.length > 0;
-    console.log(next, hasAnswer);
     this.removeAnswers();
     if (messageId === 'final') {
       this.endDialogue();

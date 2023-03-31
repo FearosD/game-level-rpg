@@ -3,12 +3,12 @@ export const assetsImagesURL = [
   './assets/images/village/village-map.png',
   './assets/images/characters/merchant/marchant-idle.png',
   './assets/images/characters/benjamin/benjamin-idle.png',
+  './assets/images/characters/eleni/eleni-idle.png',
   './assets/images/characters/player/player-normal/player-idle.png',
   './assets/images/characters/player/player-normal/player-walk-down.png',
   './assets/images/characters/player/player-normal/player-walk-left.png',
   './assets/images/characters/player/player-normal/player-walk-right.png',
   './assets/images/characters/player/player-normal/player-walk-up.png',
-  './assets/images/bg.png',
   './assets/images/characters/sign/talk-sign.png',
 ];
 

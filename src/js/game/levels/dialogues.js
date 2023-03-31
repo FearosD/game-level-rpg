@@ -77,6 +77,108 @@ const dialogues = {
       answers: [],
     },
   },
+  merchant: {
+    npc: 'Merchant',
+    start: {
+      name: 'merchant',
+      text: 'Hello, traveler. What brings you to our village?',
+      next: 'message-1',
+      answers: [],
+    },
+    'message-1': {
+      name: 'player',
+      text: 'I heard rumors about a terrible accident. What happened here?',
+      next: 'message-2',
+      answers: [],
+    },
+    'message-2': {
+      name: 'merchant',
+      text: "Yes, we really need help. Evil appeared next to us in the dungeon, and the residents decided to leave. More precisely, those who were able to survive. I got injured and I can't handle the danger myself. But I am ready to provide you with my weapons if you decide to help us.",
+      next: 'message-3',
+      answers: [],
+    },
+    'message-3': {
+      name: 'player',
+      text: "I'm ready to help. How can I get into the dungeon?",
+      next: 'message-4',
+      answers: [],
+    },
+    'message-4': {
+      name: 'merchant',
+      text: 'I have a map and a key to the entrance. I will give you everything you need so that you can get to evil. Be careful, traveler. Evil is very dangerous.',
+      next: 'message-5',
+      answers: [],
+    },
+    'message-5': {
+      name: 'player',
+      text: 'Thanks for the warning. I will do everything in my power to protect your village.',
+      next: 'final',
+      answers: [],
+    },
+    final: {
+      name: 'merchant',
+      text: 'Thank you, traveler. I will pray for your safety and success in the battle against evil.',
+      next: '',
+      answers: [],
+    },
+  },
+  eleni: {
+    npc: 'Eleni',
+    start: {
+      name: 'eleni',
+      text: 'Hello, traveler. Have you decided to help us? We need strong and brave people.',
+      next: 'message-1',
+      answers: [],
+    },
+    'message-1': {
+      name: 'player',
+      text: 'Yes, I heard about your trouble. What happened to you?',
+      next: 'message-2',
+      answers: [],
+    },
+    'message-2': {
+      name: 'eleni',
+      text: 'My husband died defending the village and me. I miraculously managed to survive and escape. I decided to stay to help Benjamin and Frank. But there are too few of us and we ourselves will not be able to cope with evil.',
+      next: 'message-3',
+      answers: [],
+    },
+    'message-3': {
+      name: 'player',
+      text: 'I understand, can you tell me anything else?',
+      next: 'message-4',
+      answers: [],
+    },
+    'message-4': {
+      name: 'eleni',
+      text: "I don't think so. I was too scared that night, you'd better talk to Benjamin or Frank.",
+      next: 'message-5',
+      answers: [],
+    },
+    'message-5': {
+      name: 'player',
+      text: "I wouldn't mind any help.",
+      next: 'message-6',
+      answers: [],
+    },
+    'message-6': {
+      name: 'eleni',
+      text: "I understand, but we can't find you a partner. Frank was seriously injured, and there were no other residents left.",
+      next: 'message-7',
+      answers: [],
+    },
+    'message-7': {
+      name: 'player',
+      text: "It's okay, I'll try to cope on my own.",
+      next: 'final',
+      answers: [],
+    },
+    final: {
+      name: 'eleni',
+      text: 'You are very brave, but be careful, evil is very dangerous. Let the apparent calmness not mislead you. Good luck to you.',
+      next: '',
+      answers: [],
+    },
+  },
 };
 
 export default dialogues;
