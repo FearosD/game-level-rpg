@@ -43,6 +43,7 @@ export const stylesImagesURL = [
   './images/dialogue/dlg-shape-bot.png',
   './images/dialogue/btn-nxt-n.png',
   './images/dialogue/btn-nxt-h.png',
+  './images/shop/trade-shape.png',
 ];
 
 export const assetsSoundURL = [

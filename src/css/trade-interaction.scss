@@ -1,0 +1,25 @@
+.trade-interaction {
+  position: absolute;
+  bottom: 112px;
+  z-index: 10;
+  user-select: none;
+  width: 384px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-image: url('../images/shop/trade-shape.png');
+
+  // .trade-ineraction__buton
+
+  &__button {
+    color: black;
+    background-color: rgba(234, 212, 170, 1);
+    border-radius: 12px;
+    padding: 8px;
+
+    &:hover {
+      background-color: rgba(234, 212, 170, 0.6);
+    }
+  }
+}
