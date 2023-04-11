@@ -58,6 +58,7 @@ export default class Level extends EventEmitter {
     });
 
     this.createOjbects(player);
+    gsap.from(this.canvas, { opacity: 0 });
   }
 
   createOjbects(player) {
