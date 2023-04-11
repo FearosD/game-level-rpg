@@ -1,15 +1,26 @@
 export const assetsImagesURL = [
-  './assets/images/dungeon/dungeon-map.png',
-  './assets/images/village/village-map.png',
-  './assets/images/characters/merchant/merchant-idle.png',
-  './assets/images/characters/benjamin/benjamin-idle.png',
-  './assets/images/characters/eleni/eleni-idle.png',
-  './assets/images/characters/player/player-normal/player-idle.png',
-  './assets/images/characters/player/player-normal/player-walk-down.png',
-  './assets/images/characters/player/player-normal/player-walk-left.png',
-  './assets/images/characters/player/player-normal/player-walk-right.png',
-  './assets/images/characters/player/player-normal/player-walk-up.png',
-  './assets/images/characters/sign/talk-sign.png',
+  './assets/dungeon/dungeon-map.png',
+  './assets/village/village-map.png',
+  './assets/characters/merchant/merchant-idle.png',
+  './assets/characters/benjamin/benjamin-idle.png',
+  './assets/characters/eleni/eleni-idle.png',
+  './assets/characters/player/player-normal/player-idle.png',
+  './assets/characters/player/player-normal/player-walk-down.png',
+  './assets/characters/player/player-normal/player-walk-left.png',
+  './assets/characters/player/player-normal/player-walk-right.png',
+  './assets/characters/player/player-normal/player-walk-up.png',
+  './assets/characters/sign/talk-sign.png',
+];
+
+export const stylesInitialImagesURL = [
+  './images/ui/cursor.png',
+  './images/menu/left-chain.png',
+  './images/menu/right-chain.png',
+  './images/menu/menu.png',
+  './images/menu/menu-load.png',
+  './images/menu/input-field.png',
+  './images/menu/btn-normal.png',
+  './images/menu/btn-hover.png',
 ];
 
 export const assetsSoundURL = [

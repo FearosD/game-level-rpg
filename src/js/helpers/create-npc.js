@@ -1,3 +1,4 @@
+import Merchant from '../game/classes/Merchant';
 import Npc from '../game/classes/Npc';
 
 const createNpc = ({ canvas, name, position }) => {
@@ -19,4 +20,24 @@ const createNpc = ({ canvas, name, position }) => {
   });
 };
 
-export default createNpc;
+const createMerchant = ({ canvas, name, position, shopItems }) => {
+  return new Merchant({
+    canvas,
+    imageName: `${name}-idle`,
+    name,
+    shopItems,
+    scale: 1.5,
+    position,
+    maxFrame: 4,
+    holdFrame: 12,
+    animations: {
+      idle: {
+        maxFrame: 4,
+        holdFrame: 12,
+        imageName: `${name}-idle`,
+      },
+    },
+  });
+};
+
+export { createNpc, createMerchant };

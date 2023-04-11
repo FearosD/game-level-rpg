@@ -8,7 +8,9 @@ function preloadImage(url, assetData) {
     // result.name = url.slice(url.lastIndexOf('/') + 1, url.lastIndexOf('.'));
     result.onload = () => resolve(result);
     result.onerror = reject;
-  }).then((image) => assetData.push(image));
+  }).then((image) => {
+    if (assetData) assetData.push(image);
+  });
 }
 
 function preloadSound(url, assetData) {
@@ -24,7 +26,7 @@ function preloadSound(url, assetData) {
   }).then((sound) => assetData.push(sound));
 }
 
-function preloadAllImages(imageUrls, assetData) {
+export function preloadAllImages(imageUrls, assetData) {
   const loadPromises = [];
   for (let i = 0; i < imageUrls.length; ++i) {
     loadPromises.push(preloadImage(imageUrls[i], assetData));

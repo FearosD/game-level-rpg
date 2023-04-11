@@ -4,7 +4,7 @@ import {
 } from '../../helpers/interraction-zone';
 import Level from '../classes/Level';
 import { parsedVillageCollisions } from './village-collisions';
-import createNpc from '../../helpers/create-npc';
+import { createMerchant, createNpc } from '../../helpers/create-npc';
 
 export default class Village extends Level {
   constructor() {
@@ -51,9 +51,10 @@ export default class Village extends Level {
       },
     });
 
-    const merchant = createNpc({
+    const merchant = createMerchant({
       canvas: this.canvas,
       name: 'merchant',
+      shopItems: [1, 2, 3, 5, 6],
       position: {
         x: 14 * 48 + this.offsetMap.x + this.offsetNpc.x,
         y: 19 * 48 + this.offsetMap.y + this.offsetNpc.y,

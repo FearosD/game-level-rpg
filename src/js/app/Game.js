@@ -104,6 +104,7 @@ export default class Game extends EventEmitter {
       canvas: this.canvas,
       imageName: 'player-idle',
       name: 'player',
+      gold: 80,
       scale: 1.5,
       position: {
         x: this.canvas.width / 2 - 42,

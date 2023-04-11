@@ -11,6 +11,7 @@ export default class Player extends AnimatedSprite {
     animations,
     currentPosition = [1, 1],
     name,
+    gold = 100,
   }) {
     super({
       position,
@@ -32,6 +33,9 @@ export default class Player extends AnimatedSprite {
       height: 48,
       width: 48,
     };
+
+    this.gold = gold;
+    this.inventory = [];
 
     this.currentPosition = currentPosition;
     // this.saveOptions = {
@@ -59,6 +63,8 @@ export default class Player extends AnimatedSprite {
       posX: this.posX,
       posY: this.posY,
       currentPosition: this.currentPosition,
+      gold: this.gold,
+      inventory: this.inventory,
     };
   }
 }

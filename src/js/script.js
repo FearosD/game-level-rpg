@@ -9,6 +9,8 @@ import Setting from './app/Setting';
 import Level from './game/classes/Level';
 import Dungeon from './game/levels/Dungeon';
 import Village from './game/levels/Village';
+import { stylesInitialImagesURL } from './helpers/assets-list';
+import { preloadAllImages } from './helpers/progress';
 
 const gameContainer = document.querySelector('#game');
 const menu = new Menu();
@@ -37,5 +39,5 @@ const controller = new Controller({
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  controller.initGame();
+  preloadAllImages(stylesInitialImagesURL).then(() => controller.initGame());
 });

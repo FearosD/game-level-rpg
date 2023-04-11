@@ -3,7 +3,7 @@ import AnimatedSprite from './AnimatedSprite';
 import Sprite from './Sprite';
 
 export default class Npc extends AnimatedSprite {
-  constructor(
+  constructor({
     position,
     imageName,
     canvas,
@@ -11,9 +11,9 @@ export default class Npc extends AnimatedSprite {
     maxFrame = 1,
     holdFrame = 1,
     animations,
-    name
-  ) {
-    super(
+    name,
+  }) {
+    super({
       position,
       imageName,
       canvas,
@@ -21,8 +21,8 @@ export default class Npc extends AnimatedSprite {
       maxFrame,
       holdFrame,
       animations,
-      name
-    );
+      name,
+    });
     this.interractionPositions = [];
     this.canInterraction = false;
     this.interractionSign = new Sprite({
