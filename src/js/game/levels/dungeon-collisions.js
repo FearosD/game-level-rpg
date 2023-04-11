@@ -1,3 +1,5 @@
+import parse2D from '../../helpers/parse-array';
+
 const dungeonCollision = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -140,12 +142,4 @@ const dungeonCollision = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
 
-Array.prototype.parse2D = function (columns) {
-  const rows = [];
-  for (let i = 0; i < this.length; i += columns) {
-    rows.push(this.slice(i, i + columns));
-  }
-  return rows;
-};
-
-export const parsedDungeonCollisions = dungeonCollision.parse2D(60);
+export const parsedDungeonCollisions = parse2D(dungeonCollision, 60);
