@@ -30,18 +30,18 @@
   height: 64px;
 
   &#btn-sound {
-    background-image: url('../images/ui/setting/btn-sound-normal.png');
+    background-image: url('../images/setting/btn-sound-normal.png');
 
     &:hover {
-      background-image: url('../images/ui/setting/btn-sound-hover.png');
+      background-image: url('../images/setting/btn-sound-hover.png');
     }
   }
 
   &#btn-setting {
-    background-image: url('../images/ui/setting/btn-setting-normal.png');
+    background-image: url('../images/setting/btn-setting-normal.png');
 
     &:hover {
-      background-image: url('../images/ui/setting/btn-setting-hover.png');
+      background-image: url('../images/setting/btn-setting-hover.png');
     }
   }
 }

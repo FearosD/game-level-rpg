@@ -13,7 +13,7 @@ export const assetsImagesURL = [
 ];
 
 export const stylesInitialImagesURL = [
-  './images/ui/cursor.png',
+  './images/menu/cursor.png',
   './images/menu/left-chain.png',
   './images/menu/right-chain.png',
   './images/menu/menu.png',
@@ -21,6 +21,28 @@ export const stylesInitialImagesURL = [
   './images/menu/input-field.png',
   './images/menu/btn-normal.png',
   './images/menu/btn-hover.png',
+];
+
+export const stylesImagesURL = [
+  './images/setting/btn-sound-normal.png',
+  './images/setting/btn-sound-hover.png',
+  './images/setting/btn-setting-normal.png',
+  './images/setting/btn-setting-hover.png',
+  './images/menu/menu-save.png',
+  './images/menu/menu-transition.png',
+  './images/dialogue/avatar-bg.png',
+  './images/dialogue/player-avatar.png',
+  './images/dialogue/name-right.png',
+  './images/dialogue/name-left.png',
+  './images/dialogue/name-center.png',
+  './images/dialogue/merchant-avatar.png',
+  './images/dialogue/benjamin-avatar.png',
+  './images/dialogue/eleni-avatar.png',
+  './images/dialogue/dlg-shape-top.png',
+  './images/dialogue/dlg-shape-mid.png',
+  './images/dialogue/dlg-shape-bot.png',
+  './images/dialogue/btn-nxt-n.png',
+  './images/dialogue/btn-nxt-h.png',
 ];
 
 export const assetsSoundURL = [

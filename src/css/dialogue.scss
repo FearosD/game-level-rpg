@@ -11,7 +11,7 @@
     width: 256px;
     height: 256px;
     top: -210px;
-    background-image: url('../images/ui/dialogue/avatar-bg.png');
+    background-image: url('../images/dialogue/avatar-bg.png');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +22,7 @@
       .dialogue__avatar {
         width: 200px;
         height: 200px;
-        background-image: url('../images/ui/dialogue/player-avatar.png');
+        background-image: url('../images/dialogue/player-avatar.png');
       }
 
       .dialogue__name {
@@ -34,7 +34,7 @@
       right: -42px;
 
       .dialogue__avatar {
-        background-image: url('../images/ui/dialogue/player-avatar.png');
+        background-image: url('../images/dialogue/player-avatar.png');
       }
 
       .dialogue__name {
@@ -52,19 +52,19 @@
 
     &--Benjamin {
       .dialogue__avatar {
-        background-image: url('../images/ui/dialogue/benjamin-avatar.png');
+        background-image: url('../images/dialogue/benjamin-avatar.png');
       }
     }
 
     &--Merchant {
       .dialogue__avatar {
-        background-image: url('../images/ui/dialogue/merchant-avatar.png');
+        background-image: url('../images/dialogue/merchant-avatar.png');
       }
     }
 
     &--Eleni {
       .dialogue__avatar {
-        background-image: url('../images/ui/dialogue/eleni-avatar.png');
+        background-image: url('../images/dialogue/eleni-avatar.png');
       }
     }
   }
@@ -84,9 +84,9 @@
     bottom: 0;
     height: 92px;
     padding: 24px 27px;
-    background-image: url('../images/ui/dialogue/name-left.png'),
-      url('../images/ui/dialogue/name-right.png'),
-      url('../images/ui/dialogue/name-center.png');
+    background-image: url('../images/dialogue/name-left.png'),
+      url('../images/dialogue/name-right.png'),
+      url('../images/dialogue/name-center.png');
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-position: left, right, center;
     background-size: auto, auto, 80% 92px;
@@ -97,9 +97,9 @@
   &__shape {
     width: 1088px;
     padding: 52px 64px;
-    background-image: url('../images/ui/dialogue/dlg-shape-top.png'),
-      url('../images/ui/dialogue/dlg-shape-bot.png'),
-      url('../images/ui/dialogue/dlg-shape-mid.png');
+    background-image: url('../images/dialogue/dlg-shape-top.png'),
+      url('../images/dialogue/dlg-shape-bot.png'),
+      url('../images/dialogue/dlg-shape-mid.png');
     background-repeat: no-repeat, no-repeat, repeat-y;
     background-position: top, bottom, center;
     display: flex;
@@ -137,10 +137,10 @@
     left: 54px;
     width: 64px;
     height: 64px;
-    background-image: url('../images/ui/dialogue/btn-nxt-n.png');
+    background-image: url('../images/dialogue/btn-nxt-n.png');
 
     &:hover {
-      background-image: url('../images/ui/dialogue/btn-nxt-h.png');
+      background-image: url('../images/dialogue/btn-nxt-h.png');
     }
   }
 }

@@ -5,6 +5,7 @@ import {
   assetsImages,
   assetsSoundURL,
   assetsSounds,
+  stylesImagesURL,
 } from '../helpers/assets-list';
 
 export default class Loader {
@@ -21,6 +22,7 @@ export default class Loader {
       assetDataImages: assetsImages,
       dataSounds: assetsSoundURL,
       assetDataSounds: assetsSounds,
+      styleDataImages: stylesImagesURL,
     });
     // console.log(assetsImages);
     // console.log(assetsImages[0].attributes.name.value);

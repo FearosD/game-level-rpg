@@ -49,6 +49,7 @@ export default function startProgress({
   assetDataImages,
   dataSounds,
   assetDataSounds,
+  styleDataImages,
 }) {
   const progress = new Progress({
     container: document.querySelector('.game__loader-bar'),
@@ -62,6 +63,7 @@ export default function startProgress({
     .promise(
       Promise.all([
         preloadAllImages(dataImages, assetDataImages),
+        preloadAllImages(styleDataImages),
         preloadAllSounds(dataSounds, assetDataSounds),
       ])
     )
