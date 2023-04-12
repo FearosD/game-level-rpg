@@ -220,5 +220,6 @@ export default class Controller {
   tradeMerchant = (shopItems) => {
     console.log('start trade');
     console.log(shopItems);
+    console.log(this.game.player);
   };
 }
