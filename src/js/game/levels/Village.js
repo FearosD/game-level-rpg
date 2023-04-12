@@ -29,13 +29,16 @@ export default class Village extends Level {
 
   get offsetMap() {
     return {
-      x: this.isChangeLevel ? -(36 * 48) : 0,
-      y: this.isChangeLevel ? -(2 * 48) : -(25 * 48),
+      // x: this.isChangeLevel ? -(36 * 48) : 0,
+      // y: this.isChangeLevel ? -(2 * 48) : -(25 * 48),
+      x: this.isChangeLevel ? -(36 * 48) : 1 * 48,
+      y: this.isChangeLevel ? -(2 * 48) : -(11 * 48),
     };
   }
 
   get startPosition() {
-    return this.isChangeLevel ? [49, 10] : [13, 33];
+    // return this.isChangeLevel ? [49, 10] : [13, 33];
+    return this.isChangeLevel ? [49, 10] : [12, 19];
   }
 
   createOjbects(player) {
@@ -73,7 +76,7 @@ export default class Village extends Level {
     if (!this.levelStart) {
       this.npc.push(benjamin, eleni);
       this.merchant.push(merchant);
-      this.levelObject.push(this.map, ...this.npc);
+      this.levelObject.push(this.map, ...this.npc, ...this.merchant);
       this.levelObject.forEach((object) =>
         createInterractionPosition(object, this.map)
       );
@@ -82,7 +85,7 @@ export default class Village extends Level {
       npc.subscribe(`dialogue ${npc.name}`, this.startDialogue);
     });
     this.merchant.forEach((merchant) => {
-      merchant.subscribe(`trade ${merchant.name}`, this.startTrade);
+      merchant.subscribe(`trade ${merchant.name}`, this.tradeNpc);
     });
   }
 
@@ -90,8 +93,8 @@ export default class Village extends Level {
     this.emit('dialogue npc', dialogue);
   };
 
-  startTrade = (dialogue) => {
-    // this.emit('trade npc', dialogue);
+  tradeNpc = (merchantData) => {
+    this.emit('trade npc', merchantData);
   };
 
   //
@@ -124,7 +127,7 @@ export default class Village extends Level {
       npc.removeInterraction();
     });
     this.merchant.forEach((merchant) => {
-      merchant.unsubscribe(`trade ${npc.name}`, this.startTrade);
+      merchant.unsubscribe(`trade ${merchant.name}`, this.tradeNpc);
       merchant.removeInterraction();
     });
     this.npc = [];

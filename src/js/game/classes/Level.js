@@ -26,6 +26,7 @@ export default class Level extends EventEmitter {
     this.gameLoop = null;
     this.isChangeLevel = false;
     this.npc = [];
+    this.merchant = [];
     this.canInterraction = false;
     this.interractionPositions = [];
   }

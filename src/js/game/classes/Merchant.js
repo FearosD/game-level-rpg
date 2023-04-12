@@ -1,5 +1,5 @@
 import Npc from './Npc';
-import Shop from './Shop';
+// import Shop from './ShopModel';
 
 export default class Merchant extends Npc {
   constructor({
@@ -24,16 +24,16 @@ export default class Merchant extends Npc {
       name,
     });
     this.shopItems = shopItems;
-    this.shop = null;
-    window.merchant = this;
+    // this.shop = null;
+    // window.merchant = this;
   }
 
-  createShop() {
-    if (this.shop === null) {
-      this.shop = new Shop(this.shopItems);
-      window.shop = this.shop;
-    }
-  }
+  // createShop() {
+  //   if (this.shop === null) {
+  //     this.shop = new Shop(this.shopItems);
+  //     window.shop = this.shop;
+  //   }
+  // }
 
   interractionHanlder = (event) => {
     if (!this.canInterraction) return;
@@ -45,7 +45,11 @@ export default class Merchant extends Npc {
       mouseY >= this.posY &&
       mouseY <= this.posY + this.height * this.scale
     ) {
-      this.emit(`trade ${this.name}`, this);
+      this.emit(`trade ${this.name}`, {
+        name: this.name,
+        dialogue: this.dialogue,
+        shopItems: this.shopItems,
+      });
     }
   };
 
@@ -54,7 +58,8 @@ export default class Merchant extends Npc {
       posX: this.posX,
       posY: this.posY,
       canInterraction: this.canInterraction,
-      shopItems: this.shop.idItemsStore,
+      // shopItems: this.shop.idItemsStore,
+      shopItems: this.shopItems,
     };
   }
 }

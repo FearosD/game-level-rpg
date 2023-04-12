@@ -39,5 +39,5 @@ const controller = new Controller({
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  // preloadAllImages(stylesInitialImagesURL).then(() => controller.initGame());
+  preloadAllImages(stylesInitialImagesURL).then(() => controller.initGame());
 });

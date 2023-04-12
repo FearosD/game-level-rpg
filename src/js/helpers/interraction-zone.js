@@ -7,8 +7,16 @@ const createInterractionPosition = (object, map) => {
       if ((x === 1) & (y === 0)) continue;
       const posX = object.posX + x * 48;
       const posY = object.posY + 48 + y * 48;
-      const endX = Math.floor((Math.abs(map.posX) + posX) / 48);
-      const endY = Math.floor((Math.abs(map.posY) + posY) / 48);
+      const endX = Math.floor(
+        (map.posX <= 0
+          ? Math.abs(map.posX) + posX
+          : posX - Math.abs(map.posX)) / 48
+      );
+      const endY = Math.floor(
+        (map.posY <= 0
+          ? Math.abs(map.posY) + posY
+          : posY - Math.abs(map.posY)) / 48
+      );
       const position = [endX, endY];
       row.push(position);
     }

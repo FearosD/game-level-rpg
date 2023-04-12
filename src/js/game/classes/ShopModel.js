@@ -1,6 +1,6 @@
 import { gameItems } from '../entitys/game-items';
 
-export default class Shop {
+export default class ShopModel {
   constructor(idItems) {
     this.idItems = idItems;
     this.store = [];

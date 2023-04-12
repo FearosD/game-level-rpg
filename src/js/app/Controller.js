@@ -51,6 +51,7 @@ export default class Controller {
     this.menuLoad.subscribe('game get save', this.gameGetSave);
     this.game.subscribe('dialogue npc', this.startDialogue);
     this.game.subscribe('transition level', this.startTransition);
+    this.game.subscribe('trade npc', this.tradeNpc);
   }
 
   gameStart = async () => {
@@ -195,5 +196,9 @@ export default class Controller {
     this.transition = null;
     this.setting.gameSetting.classList.toggle('disabled');
     this.game.canvas.classList.toggle('disabled');
+  };
+
+  tradeNpc = (merchantData) => {
+    console.log('interaction merchant', merchantData);
   };
 }

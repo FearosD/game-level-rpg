@@ -26,6 +26,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.currentLevel.subscribe('transition level', this.transition);
     this.currentLevel.subscribe('end move to dungeon', this.switcthToDungeon);
+    this.currentLevel.subscribe('trade npc', this.tradeNpc);
     this.gameStart = true;
   }
 
@@ -46,6 +47,7 @@ export default class Game extends EventEmitter {
         'end move to dungeon',
         this.switcthToDungeon
       );
+      this.currentLevel.unsubscribe('trade npc', this.tradeNpc);
     }
     this.currentLevel = level;
 
@@ -60,6 +62,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.currentLevel.subscribe('transition level', this.transition);
     this.currentLevel.subscribe('end move to dungeon', this.switcthToDungeon);
+    this.currentLevel.subscribe('trade npc', this.tradeNpc);
     // if (!this.gameStart) {
     //   this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     //   this.currentLevel.subscribe('transition level', this.transition);
@@ -74,6 +77,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.unsubscribe('dialogue npc', this.startDialogue);
     this.currentLevel.unsubscribe('transition level', this.transition);
     this.currentLevel.unsubscribe('end move to dungeon', this.switcthToDungeon);
+    this.currentLevel.unsubscribe('trade npc', this.tradeNpc);
     this.currentLevel = level;
     this.currentLevel.isChangeLevel = true;
     this.currentLevel.createLevel(this.canvas, this.player);
@@ -82,6 +86,7 @@ export default class Game extends EventEmitter {
     this.currentLevel.subscribe('dialogue npc', this.startDialogue);
     this.currentLevel.subscribe('transition level', this.transition);
     this.currentLevel.subscribe('end move to dungeon', this.switcthToDungeon);
+    this.currentLevel.subscribe('trade npc', this.tradeNpc);
   }
 
   switcthToDungeon = () => {
@@ -97,6 +102,10 @@ export default class Game extends EventEmitter {
 
   transition = (name) => {
     this.emit('transition level', name);
+  };
+
+  tradeNpc = (merchantData) => {
+    this.emit('trade npc', merchantData);
   };
 
   createPlayer = () => {
