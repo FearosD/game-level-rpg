@@ -9,7 +9,7 @@ const gameItems = {
     get sellPrice() {
       return this.price * 0.3;
     },
-    icon: null,
+    icon: 'axe',
     actions: ['slashing blow'],
     skills: ['close cuts', 'furious throw'],
     stats: {
@@ -29,7 +29,7 @@ const gameItems = {
     get sellPrice() {
       return this.price * 0.3;
     },
-    icon: null,
+    icon: 'spear',
     actions: ['impaling spear'],
     skills: ['wounding spearhead', 'piercing strike'],
     stats: {
@@ -48,7 +48,7 @@ const gameItems = {
     get sellPrice() {
       return this.price * 0.3;
     },
-    icon: null,
+    icon: 'staff',
     actions: ['fast strike'],
     skills: ['ring of fire', 'scorch', 'fire barrage'],
     stats: {
@@ -68,7 +68,7 @@ const gameItems = {
     get sellPrice() {
       return this.price * 0.3;
     },
-    icon: null,
+    icon: 'armor',
     actions: [],
     skills: [],
     stats: {
@@ -88,7 +88,7 @@ const gameItems = {
     get sellPrice() {
       return this.price * 0.3;
     },
-    icon: null,
+    icon: 'shield',
     actions: [],
     skills: ['raise shield'],
     stats: {
@@ -108,7 +108,7 @@ const gameItems = {
     get sellPrice() {
       return this.price * 0.3;
     },
-    icon: null,
+    icon: 'potion',
     actions: [],
     skills: ['restore health'],
     stats: null,
