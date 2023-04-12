@@ -1,7 +1,7 @@
 import {
-  createInterractionPosition,
+  createinteractionPosition,
   createTransitionZone,
-} from '../../helpers/interraction-zone';
+} from '../../helpers/interaction-zone';
 import Level from '../classes/Level';
 import { parsedVillageCollisions } from './village-collisions';
 import { createMerchant, createNpc } from '../../helpers/create-npc';
@@ -17,11 +17,11 @@ export default class Village extends Level {
       y: -48,
     };
     this.levelStart = false;
-    // this.interractionPositions = createTransitionZone([
+    // this.interactionPositions = createTransitionZone([
     //   [18, 30],
     //   [20, 33],
     // ]);
-    this.interractionPositions = createTransitionZone([
+    this.interactionPositions = createTransitionZone([
       [43, 8],
       [56, 9],
     ]);
@@ -78,7 +78,7 @@ export default class Village extends Level {
       this.merchant.push(merchant);
       this.levelObject.push(this.map, ...this.npc, ...this.merchant);
       this.levelObject.forEach((object) =>
-        createInterractionPosition(object, this.map)
+        createinteractionPosition(object, this.map)
       );
     }
     this.npc.forEach((npc) => {
@@ -106,13 +106,13 @@ export default class Village extends Level {
     this.ctx.fill();
     this.levelObject.forEach((object) => object.update());
     this.player.update();
-    if (this.canInterraction) this.onTransitionZone();
+    if (this.caninteraction) this.onTransitionZone();
   };
 
   onTransitionZone = () => {
     if (this.runCutScene) return;
     console.log('can transition dungeon');
-    this.canInterraction = false;
+    this.caninteraction = false;
     this.emit('transition level', 'Dungeon');
   };
 
@@ -124,11 +124,11 @@ export default class Village extends Level {
     super.offLoadLevel();
     this.npc.forEach((npc) => {
       npc.unsubscribe(`dialogue ${npc.name}`, this.startDialogue);
-      npc.removeInterraction();
+      npc.removeinteraction();
     });
     this.merchant.forEach((merchant) => {
       merchant.unsubscribe(`trade ${merchant.name}`, this.tradeNpc);
-      merchant.removeInterraction();
+      merchant.removeinteraction();
     });
     this.npc = [];
     this.merchant = [];

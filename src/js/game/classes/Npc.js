@@ -23,9 +23,9 @@ export default class Npc extends AnimatedSprite {
       animations,
       name,
     });
-    this.interractionPositions = [];
-    this.canInterraction = false;
-    this.interractionSign = new Sprite({
+    this.interactionPositions = [];
+    this.caninteraction = false;
+    this.interactionSign = new Sprite({
       position: {
         x: this.posX + 34,
         y: this.posY - 12,
@@ -39,21 +39,21 @@ export default class Npc extends AnimatedSprite {
 
     this.canvasRect = this.canvas.getBoundingClientRect();
 
-    this.canvas.addEventListener('click', this.interractionHanlder);
+    this.canvas.addEventListener('click', this.interactionHanlder);
   }
   draw() {
     super.draw();
-    if (this.canInterraction) this.interractionSign.draw();
+    if (this.caninteraction) this.interactionSign.draw();
   }
 
   update() {
     super.update();
-    this.interractionSign.posX = this.posX + 34;
-    this.interractionSign.posY = this.posY - 12;
+    this.interactionSign.posX = this.posX + 34;
+    this.interactionSign.posY = this.posY - 12;
   }
 
-  interractionHanlder = (event) => {
-    if (!this.canInterraction) return;
+  interactionHanlder = (event) => {
+    if (!this.caninteraction) return;
     const mouseX = event.clientX - this.canvasRect.left;
     const mouseY = event.clientY - this.canvasRect.top;
     if (
@@ -66,15 +66,15 @@ export default class Npc extends AnimatedSprite {
     }
   };
 
-  removeInterraction = () => {
-    this.canvas.removeEventListener('click', this.interractionHanlder);
+  removeinteraction = () => {
+    this.canvas.removeEventListener('click', this.interactionHanlder);
   };
 
   get saveOptions() {
     return {
       posX: this.posX,
       posY: this.posY,
-      canInterraction: this.canInterraction,
+      caninteraction: this.caninteraction,
     };
   }
 }

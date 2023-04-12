@@ -1,9 +1,9 @@
 import { parsedDungeonCollisions } from './dungeon-collisions';
 import Npc from '../classes/Npc';
 import {
-  createInterractionPosition,
+  createinteractionPosition,
   createTransitionZone,
-} from '../../helpers/interraction-zone';
+} from '../../helpers/interaction-zone';
 import Level from '../classes/Level';
 
 export default class Dungeon extends Level {
@@ -21,7 +21,7 @@ export default class Dungeon extends Level {
       y: -48,
     };
     this.levelStart = false;
-    this.interractionPositions = createTransitionZone([
+    this.interactionPositions = createTransitionZone([
       [31, 15],
       [32, 15],
     ]);
@@ -68,19 +68,19 @@ export default class Dungeon extends Level {
       // this.npc.push(testNpc);
       this.levelObject.push(this.map, ...this.npc);
       this.levelObject.forEach((object) =>
-        createInterractionPosition(object, this.map)
+        createinteractionPosition(object, this.map)
       );
     }
   }
 
   animate = () => {
     super.animate();
-    if (this.canInterraction) this.onTransitionZone();
+    if (this.caninteraction) this.onTransitionZone();
   };
 
   onTransitionZone = () => {
     console.log('can transition village');
-    this.canInterraction = false;
+    this.caninteraction = false;
     this.emit('transition level', 'Village');
   };
 
@@ -92,7 +92,7 @@ export default class Dungeon extends Level {
     super.offLoadLevel();
     // this.npc.forEach((npc) => {
     //   npc.unsubscribe(`dialogue ${npc.name}`, this.startDialogue);
-    //   npc.removeInterraction();
+    //   npc.removeinteraction();
     // });
     // this.npc = [];
   }

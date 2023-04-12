@@ -1,5 +1,5 @@
-const createInterractionPosition = (object, map) => {
-  if (!object.hasOwnProperty('canInterraction')) return;
+const createinteractionPosition = (object, map) => {
+  if (!object.hasOwnProperty('caninteraction')) return;
   let arrayPositions = [];
   for (let x = 0; x <= 2; x += 1) {
     const row = [];
@@ -23,19 +23,19 @@ const createInterractionPosition = (object, map) => {
     arrayPositions.push(row);
   }
   arrayPositions = arrayPositions.flat(1);
-  object.interractionPositions = [...arrayPositions];
+  object.interactionPositions = [...arrayPositions];
 };
 
-const checkInterraction = (player, object) => {
-  if (!object.hasOwnProperty('canInterraction')) return;
+const checkinteraction = (player, object) => {
+  if (!object.hasOwnProperty('caninteraction')) return;
   const [playerPosX, playerPosY] = player.currentPosition;
-  for (let position of object.interractionPositions) {
+  for (let position of object.interactionPositions) {
     const [objectPosX, objectPosY] = position;
     if (playerPosX === objectPosX && playerPosY === objectPosY) {
-      object.canInterraction = true;
+      object.caninteraction = true;
       break;
     }
-    object.canInterraction = false;
+    object.caninteraction = false;
   }
 };
 
@@ -55,4 +55,4 @@ const createTransitionZone = ([beginPosition, endPosition]) => {
   return arrayPositions;
 };
 
-export { checkInterraction, createInterractionPosition, createTransitionZone };
+export { checkinteraction, createinteractionPosition, createTransitionZone };

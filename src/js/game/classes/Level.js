@@ -3,9 +3,9 @@ import { gsap } from 'gsap';
 import Pathfinding from 'pathfinding';
 import { pathfinding } from '../../helpers/pathfinding';
 import {
-  checkInterraction,
-  createInterractionPosition,
-} from '../../helpers/interraction-zone';
+  checkinteraction,
+  createinteractionPosition,
+} from '../../helpers/interaction-zone';
 import EventEmitter from '../../app/EventEmitter';
 import { parsedDungeonCollisions } from '../levels/dungeon-collisions';
 
@@ -27,8 +27,8 @@ export default class Level extends EventEmitter {
     this.isChangeLevel = false;
     this.npc = [];
     this.merchant = [];
-    this.canInterraction = false;
-    this.interractionPositions = [];
+    this.caninteraction = false;
+    this.interactionPositions = [];
   }
 
   get offsetMap() {
@@ -68,7 +68,7 @@ export default class Level extends EventEmitter {
     if (!this.levelStart) {
       this.levelObject.push(this.map);
       this.levelObject.forEach((object) =>
-        createInterractionPosition(object, this.map)
+        createinteractionPosition(object, this.map)
       );
     }
   }
@@ -113,8 +113,8 @@ export default class Level extends EventEmitter {
           this.player.currentPosition[1] = endY;
           this.player.switchState('idle');
           this.canMove = true;
-          checkInterraction(this.player, object);
-          checkInterraction(this.player, this);
+          checkinteraction(this.player, object);
+          checkinteraction(this.player, this);
         },
       });
     });

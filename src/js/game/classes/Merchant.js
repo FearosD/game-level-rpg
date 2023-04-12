@@ -35,8 +35,8 @@ export default class Merchant extends Npc {
   //   }
   // }
 
-  interractionHanlder = (event) => {
-    if (!this.canInterraction) return;
+  interactionHanlder = (event) => {
+    if (!this.caninteraction) return;
     const mouseX = event.clientX - this.canvasRect.left;
     const mouseY = event.clientY - this.canvasRect.top;
     if (
@@ -57,7 +57,7 @@ export default class Merchant extends Npc {
     return {
       posX: this.posX,
       posY: this.posY,
-      canInterraction: this.canInterraction,
+      caninteraction: this.caninteraction,
       // shopItems: this.shop.idItemsStore,
       shopItems: this.shopItems,
     };
