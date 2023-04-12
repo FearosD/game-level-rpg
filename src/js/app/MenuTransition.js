@@ -6,7 +6,7 @@ export default class MenuTransition extends EventEmitter {
     super();
     this.gameTransition = gameTransition();
     this.targetTransition = targetTransition;
-    this.accentBtn = this.gameTransition.querySelector('#btn-accept');
+    this.acceptBtn = this.gameTransition.querySelector('#btn-accept');
     this.cancelBtn = this.gameTransition.querySelector('#btn-cancel');
     this.text = this.gameTransition.querySelector(
       '.game__transition-content span'
@@ -14,7 +14,7 @@ export default class MenuTransition extends EventEmitter {
   }
   createTransition() {
     this.text.textContent = `Move to the ${this.targetTransition}?`;
-    this.accentBtn.addEventListener('click', () => {
+    this.acceptBtn.addEventListener('click', () => {
       this.emit('accept transition', this.targetTransition);
     });
     this.cancelBtn.addEventListener('click', () => {

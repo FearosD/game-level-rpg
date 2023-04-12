@@ -1,3 +1,4 @@
+import tradeInteraction from '../components/shop/trade-interaction';
 import {
   assetsImages,
   takeImage,
@@ -7,6 +8,7 @@ import {
 import { moveToDungeon } from '../helpers/cut-scenes';
 import Dialogue from './Dialogue';
 import MenuTransition from './MenuTransition';
+import TradeInteraction from './TradeInteraction';
 
 export default class Controller {
   constructor({
@@ -29,6 +31,7 @@ export default class Controller {
     this.saveModel = saveModel;
     this.dialogue = null;
     this.transition = null;
+    this.tradeInteraction = null;
     // this.tempSave = null;
   }
 
@@ -153,8 +156,8 @@ export default class Controller {
     const dialogue = new Dialogue(dialogueData);
     this.dialogue = dialogue;
     this.dialogue.subscribe('end dialogue', this.endDialogue);
-    this.setting.gameSetting.classList.toggle('disabled');
-    this.game.canvas.classList.toggle('disabled');
+    this.setting.gameSetting.classList.add('disabled');
+    this.game.canvas.classList.add('disabled');
     this.gameContainer.append(this.dialogue.createDialogue());
   };
 
@@ -162,8 +165,8 @@ export default class Controller {
     console.log('end dialogue');
     this.dialogue.remove();
     this.dialogue = null;
-    this.setting.gameSetting.classList.toggle('disabled');
-    this.game.canvas.classList.toggle('disabled');
+    this.setting.gameSetting.classList.remove('disabled');
+    this.game.canvas.classList.remove('disabled');
   };
 
   startTransition = (name) => {
@@ -200,5 +203,22 @@ export default class Controller {
 
   tradeNpc = (merchantData) => {
     console.log('interaction merchant', merchantData);
+    this.setting.gameSetting.classList.add('disabled');
+    this.game.canvas.classList.add('disabled');
+    this.tradeInteraction = new TradeInteraction(merchantData);
+    this.gameContainer.append(this.tradeInteraction.create());
+    this.tradeInteraction.subscribe('talk merchant', this.talkMerchant);
+    this.tradeInteraction.subscribe('trade merchant', this.tradeMerchant);
+  };
+
+  talkMerchant = (dialogue) => {
+    this.tradeInteraction.remove();
+    this.tradeInteraction = null;
+    this.startDialogue(dialogue);
+  };
+
+  tradeMerchant = (shopItems) => {
+    console.log('start trade');
+    console.log(shopItems);
   };
 }

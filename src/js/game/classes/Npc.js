@@ -39,7 +39,8 @@ export default class Npc extends AnimatedSprite {
 
     this.canvasRect = this.canvas.getBoundingClientRect();
 
-    this.canvas.addEventListener('click', this.interactionHanlder);
+    this.handler = this.interactionHanlder.bind(this);
+    this.canvas.addEventListener('click', this.handler);
   }
   draw() {
     super.draw();
@@ -52,7 +53,7 @@ export default class Npc extends AnimatedSprite {
     this.interactionSign.posY = this.posY - 12;
   }
 
-  interactionHanlder = (event) => {
+  interactionHanlder(event) {
     if (!this.caninteraction) return;
     const mouseX = event.clientX - this.canvasRect.left;
     const mouseY = event.clientY - this.canvasRect.top;
@@ -62,12 +63,13 @@ export default class Npc extends AnimatedSprite {
       mouseY >= this.posY &&
       mouseY <= this.posY + this.height * this.scale
     ) {
+      console.log('interaction npc');
       this.emit(`dialogue ${this.name}`, this.dialogue);
     }
-  };
+  }
 
   removeinteraction = () => {
-    this.canvas.removeEventListener('click', this.interactionHanlder);
+    this.canvas.removeEventListener('click', this.handler);
   };
 
   get saveOptions() {
