@@ -1,4 +1,5 @@
 import EventEmitter from '../../app/EventEmitter';
+import closeButton from '../../components/shop/close-button';
 import infoButton from '../../components/shop/info-button';
 import infoItem from '../../components/shop/info-item';
 import infoStats from '../../components/shop/info-stats';
@@ -23,6 +24,7 @@ export default class ShopView extends EventEmitter {
     this.labels = null;
     this.itemsWrapper = null;
     this.infoText = null;
+    this.closeButton = closeButton();
   }
 
   createShop({ nameMerchant, gold }) {
@@ -34,12 +36,14 @@ export default class ShopView extends EventEmitter {
       this.shopMenu,
       this.infoItem,
       this.playerGold,
-      this.merchantAvatar
+      this.merchantAvatar,
+      this.closeButton
     );
     this.gameContainer.append(this.shopWrapper);
 
     this.initSelectors();
     this.labelsHandlers();
+    this.closeHandler();
 
     this.clearInfo();
 
@@ -64,12 +68,12 @@ export default class ShopView extends EventEmitter {
     const text = this.isShopLabel
       ? 'What did you like?'
       : 'Do you want to sell something?';
-    this.infoText.textContent = text;
     if (this.infoItem.childNodes.length > 1) {
       this.infoText = this.infoText.cloneNode();
       this.removeChildren(this.infoItem);
+      this.infoItem.append(this.infoText);
     }
-    this.infoItem.append(this.infoText);
+    this.infoText.textContent = text;
   }
 
   labelsHandlers() {
@@ -108,7 +112,6 @@ export default class ShopView extends EventEmitter {
   showInfo(item, playerGold) {
     this.clearInfo();
     const { id, stats, name } = item;
-    console.log(item);
     const statsWrapper = infoStatsWrapper();
 
     for (const stat in stats) {
@@ -117,14 +120,18 @@ export default class ShopView extends EventEmitter {
     }
 
     const typePrice = this.isShopLabel ? 'price' : 'sell price';
-    const price = infoStats(typePrice, item[typePrice]);
+    const priceValue = item[typePrice];
+    const price = infoStats(typePrice, priceValue);
     statsWrapper.append(price);
 
     const typeButton = this.isShopLabel ? 'buy' : 'sell';
     const button = infoButton(typeButton);
-    if (this.isShopLabel && item[typePrice] > playerGold) {
+    if (this.isShopLabel && priceValue > playerGold) {
       button.classList.add('disabled');
     }
+    button.addEventListener('click', () => {
+      this.emit('deal trade', { id, type: button.id });
+    });
 
     this.infoText.textContent = name;
     this.infoItem.append(statsWrapper, button);
@@ -138,5 +145,24 @@ export default class ShopView extends EventEmitter {
 
   setPlayerGold(value) {
     this.goldValue.textContent = value;
+  }
+
+  updateShop(items, playerGold) {
+    this.clearInfo();
+    this.createShopList(items);
+    this.setPlayerGold(playerGold);
+  }
+
+  closeHandler() {
+    this.closeButton.addEventListener('click', () => {
+      this.emit('close shop');
+    });
+  }
+
+  async remove() {
+    this.shopWrapper.classList.add('shop--out');
+    await setTimeout(() => {
+      this.shopWrapper.remove();
+    }, 1000);
   }
 }

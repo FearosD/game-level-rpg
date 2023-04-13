@@ -57,6 +57,8 @@ export default class Controller {
     this.game.subscribe('dialogue npc', this.startDialogue);
     this.game.subscribe('transition level', this.startTransition);
     this.game.subscribe('trade npc', this.tradeNpc);
+
+    this.shopController.subscribe('close shop', this.closeShop);
   }
 
   gameStart = async () => {
@@ -223,5 +225,17 @@ export default class Controller {
     this.tradeInteraction.remove();
     this.tradeInteraction = null;
     this.shopController.createShop({ merchantData, player: this.game.player });
+  };
+
+  closeShop = ({ merchantName, idShopItems }) => {
+    const [currentMerchant] = this.game.currentLevel.merchant.filter(
+      (findMerchant) => findMerchant.name === merchantName
+    );
+    currentMerchant.shopItems = idShopItems;
+
+    this.shopController.offShop();
+
+    this.setting.gameSetting.classList.toggle('disabled');
+    this.game.canvas.classList.toggle('disabled');
   };
 }

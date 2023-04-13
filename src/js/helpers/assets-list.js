@@ -63,6 +63,8 @@ export const stylesImagesURL = [
   './images/shop/gold-bg.png',
   './images/shop/shop-bg.png',
   './images/shop/icon-health.png',
+  './images/shop/btn-exit-n.png',
+  './images/shop/btn-exit-h.png',
 ];
 
 export const assetsSoundURL = [

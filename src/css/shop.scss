@@ -193,9 +193,6 @@
 
     // .item__text
 
-    &__text {
-    }
-
     &__stats-wrapper {
       display: flex;
       flex-direction: column;
@@ -229,7 +226,7 @@
         background-image: url('../images/shop/icon-deffense.png');
       }
 
-      &--price {
+      &--price, &--sell-price {
         background-image: url('../images/shop/icon-price.png');
       }
 
@@ -307,6 +304,19 @@
 
     &__avatar--Merchant {
       background-image: url('../images/dialogue/merchant-avatar.png');
+    }
+  }
+
+  .button-close {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    right:20px;
+    top:20px;
+    background-image: url('../images/shop/btn-exit-n.png');
+
+    &:hover {
+      background-image: url('../images/shop/btn-exit-h.png');
     }
   }
 
