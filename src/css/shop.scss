@@ -1,8 +1,8 @@
 .shop {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 0;
+  width: 1280px;
+  height: 720px;
+  position: absolute;
+  z-index: 10;
   user-select: none;
   opacity: 1;
   background-image: url('../images/shop/shop-bg.png');
@@ -53,6 +53,7 @@
 
       &--active {
         z-index: 1;
+        pointer-events: none;
       }
     }
 
@@ -70,18 +71,19 @@
     &__item {
       width: 64px;
       height: 64px;
-      background-image: url('../images/shop/item-bg.png');
+
       display: flex;
       align-items: center;
       justify-content: center;
       filter: grayscale(1);
-      transform-origin: center;
-      transition: all 0.5s ease;
       z-index: 2;
 
       &--active {
         filter: grayscale(0);
-        transform: scale(1.1);
+
+        & .menu__icon {
+          transform: scale(1.1);
+        }
       }
 
       &:hover {
@@ -97,38 +99,60 @@
     // .menu__icon
 
     &__icon {
-      width: 90%;
-      height: 90%;
+      width: 64px;
+      height: 64px;
+      transform-origin: center;
+      transition: all 0.5s ease;
       background-size: contain;
+      background-image: url('../images/shop/item-bg.png');
 
       &--spear {
-        background-image: url('../images/shop/icon-spear.png');
+        background-image: url('../images/shop/icon-spear.png'),
+          url('../images/shop/item-bg.png');
+        background-size: 90%, contain;
+        background-position: center, center;
       }
 
       &--armor {
-        background-image: url('../images/shop/icon-armor.png');
+        background-image: url('../images/shop/icon-armor.png'),
+          url('../images/shop/item-bg.png');
+        background-size: 90%, contain;
+        background-position: center, center;
       }
 
       &--potion {
-        background-image: url('../images/shop/icon-potion.png');
+        background-image: url('../images/shop/icon-potion.png'),
+          url('../images/shop/item-bg.png');
+        background-size: 90%, contain;
+        background-position: center, center;
       }
 
       &--shield {
-        background-image: url('../images/shop/icon-shield.png');
+        background-image: url('../images/shop/icon-shield.png'),
+          url('../images/shop/item-bg.png');
+        background-size: 90%, contain;
+        background-position: center, center;
       }
 
       &--staff {
-        background-image: url('../images/shop/icon-staff.png');
+        background-image: url('../images/shop/icon-staff.png'),
+          url('../images/shop/item-bg.png');
+        background-size: 90%, contain;
+        background-position: center, center;
       }
 
       &--axe {
-        background-image: url('../images/shop/icon-axe.png');
+        background-image: url('../images/shop/icon-axe.png'),
+          url('../images/shop/item-bg.png');
+        background-size: 90%, contain;
+        background-position: center, center;
       }
     }
 
     // .menu__description
 
     &__description {
+      display: inline;
       opacity: 0;
       width: 400px;
       position: absolute;
@@ -197,7 +221,7 @@
 
       // .item__stats-icon--atack
 
-      &--atack {
+      &--attack {
         background-image: url('../images/shop/icon-attack.png');
       }
 
@@ -207,6 +231,10 @@
 
       &--price {
         background-image: url('../images/shop/icon-price.png');
+      }
+
+      &--health {
+        background-image: url('../images/shop/icon-health.png');
       }
     }
 

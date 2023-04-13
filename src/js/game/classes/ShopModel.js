@@ -12,8 +12,7 @@ export default class ShopModel {
     });
   }
 
-  getStore() {
-    console.log(this.store);
+  get shopItems() {
     return this.store;
   }
 

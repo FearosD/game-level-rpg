@@ -54,7 +54,6 @@ export const stylesImagesURL = [
   './images/shop/icon-spear.png',
   './images/shop/icon-staff.png',
   './images/shop/item-bg.png',
-  './images/shop/list.txt',
   './images/shop/menu-item-bot.png',
   './images/shop/menu-item-mid.png',
   './images/shop/menu-item-top.png',
@@ -63,6 +62,7 @@ export const stylesImagesURL = [
   './images/shop/icon-gold.png',
   './images/shop/gold-bg.png',
   './images/shop/shop-bg.png',
+  './images/shop/icon-health.png',
 ];
 
 export const assetsSoundURL = [

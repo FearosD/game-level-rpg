@@ -8,6 +8,7 @@ import {
 import { moveToDungeon } from '../helpers/cut-scenes';
 import Dialogue from './Dialogue';
 import MenuTransition from './MenuTransition';
+import ShopController from './ShopController';
 import TradeInteraction from './TradeInteraction';
 
 export default class Controller {
@@ -32,6 +33,7 @@ export default class Controller {
     this.dialogue = null;
     this.transition = null;
     this.tradeInteraction = null;
+    this.shopController = new ShopController(this.gameContainer);
     // this.tempSave = null;
   }
 
@@ -202,7 +204,6 @@ export default class Controller {
   };
 
   tradeNpc = (merchantData) => {
-    console.log('interaction merchant', merchantData);
     this.setting.gameSetting.classList.add('disabled');
     this.game.canvas.classList.add('disabled');
     this.tradeInteraction = new TradeInteraction(merchantData);
@@ -217,9 +218,10 @@ export default class Controller {
     this.startDialogue(dialogue);
   };
 
-  tradeMerchant = (shopItems) => {
+  tradeMerchant = (merchantData) => {
     console.log('start trade');
-    console.log(shopItems);
-    console.log(this.game.player);
+    this.tradeInteraction.remove();
+    this.tradeInteraction = null;
+    this.shopController.createShop({ merchantData, player: this.game.player });
   };
 }

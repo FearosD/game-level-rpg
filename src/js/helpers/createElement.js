@@ -1,7 +1,7 @@
 export default function createElement(options) {
   const defaultOptions = {
     typeElem: 'div',
-    classElem: 'class',
+    classElem: '',
     innerElem: '',
     id: null,
   };

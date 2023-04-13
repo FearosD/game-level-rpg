@@ -6,8 +6,8 @@ const gameItems = {
     price: 20,
     inventory: 'hand',
     slot: 1,
-    get sellPrice() {
-      return this.price * 0.3;
+    get 'sell price'() {
+      return Math.floor(this.price * 0.3);
     },
     icon: 'axe',
     actions: ['slashing blow'],
@@ -26,8 +26,8 @@ const gameItems = {
     inventory: 'hand',
     slot: 2,
     price: 15,
-    get sellPrice() {
-      return this.price * 0.3;
+    get 'sell price'() {
+      return Math.floor(this.price * 0.3);
     },
     icon: 'spear',
     actions: ['impaling spear'],
@@ -45,8 +45,8 @@ const gameItems = {
     price: 25,
     inventory: 'hand',
     slot: 2,
-    get sellPrice() {
-      return this.price * 0.3;
+    get 'sell price'() {
+      return Math.floor(this.price * 0.3);
     },
     icon: 'staff',
     actions: ['fast strike'],
@@ -65,8 +65,8 @@ const gameItems = {
     inventory: 'body',
     slot: 1,
     price: 30,
-    get sellPrice() {
-      return this.price * 0.3;
+    get 'sell price'() {
+      return Math.floor(this.price * 0.3);
     },
     icon: 'armor',
     actions: [],
@@ -84,9 +84,9 @@ const gameItems = {
     type: 'shield',
     inventory: 'hand',
     slot: 1,
-    price: 10,
-    get sellPrice() {
-      return this.price * 0.3;
+    price: 100,
+    get 'sell price'() {
+      return Math.floor(this.price * 0.3);
     },
     icon: 'shield',
     actions: [],
@@ -105,8 +105,8 @@ const gameItems = {
     inventory: 'consumables',
     slot: 1,
     price: 18,
-    get sellPrice() {
-      return this.price * 0.3;
+    get 'sell price'() {
+      return Math.floor(this.price * 0.3);
     },
     icon: 'potion',
     actions: [],
