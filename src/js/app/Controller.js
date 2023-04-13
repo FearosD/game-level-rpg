@@ -228,10 +228,7 @@ export default class Controller {
   };
 
   closeShop = ({ merchantName, idShopItems }) => {
-    const [currentMerchant] = this.game.currentLevel.merchant.filter(
-      (findMerchant) => findMerchant.name === merchantName
-    );
-    currentMerchant.shopItems = idShopItems;
+    this.game.currentLevel.shopItems[merchantName] = idShopItems;
 
     this.shopController.offShop();
 

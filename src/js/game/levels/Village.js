@@ -25,6 +25,7 @@ export default class Village extends Level {
       [43, 8],
       [56, 9],
     ]);
+    this.shopItems = { merchant: [1, 2, 3, 5, 6] };
   }
 
   get offsetMap() {
@@ -57,7 +58,7 @@ export default class Village extends Level {
     const merchant = createMerchant({
       canvas: this.canvas,
       name: 'merchant',
-      shopItems: [1, 2, 3, 5, 6],
+      shopItems: this.shopItems['merchant'],
       position: {
         x: 14 * 48 + this.offsetMap.x + this.offsetNpc.x,
         y: 19 * 48 + this.offsetMap.y + this.offsetNpc.y,
@@ -94,7 +95,10 @@ export default class Village extends Level {
   };
 
   tradeNpc = (merchantData) => {
-    this.emit('trade npc', merchantData);
+    this.emit('trade npc', {
+      shopItems: this.shopItems[merchantData.name],
+      ...merchantData,
+    });
   };
 
   //

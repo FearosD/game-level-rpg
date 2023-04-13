@@ -48,7 +48,6 @@ export default class Merchant extends Npc {
       this.emit(`trade ${this.name}`, {
         name: this.name,
         dialogue: this.dialogue,
-        shopItems: this.shopItems,
       });
     }
   }
