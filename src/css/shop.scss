@@ -1,0 +1,300 @@
+.shop {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+  user-select: none;
+  opacity: 1;
+  background-image: url('../images/shop/shop-bg.png');
+
+  animation-name: shopin;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+
+  &--out {
+    animation-name: shopout;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+  }
+
+  .menu {
+    position: absolute;
+    top: 250px;
+    left: 117px;
+    width: 384px;
+    height: 256px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 64px;
+    background-image: url('../images/shop/menu-shop.png');
+
+    // .menu__label
+
+    &__label {
+      position: absolute;
+      color: black;
+      top: -70px;
+      left: 16px;
+      height: 92px;
+      padding: 24px 27px;
+      background-image: url('../images/dialogue/name-left.png'),
+        url('../images/dialogue/name-right.png'),
+        url('../images/dialogue/name-center.png');
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: left, right, center;
+      background-size: auto, auto, 80% 92px;
+      z-index: -1;
+
+      &:nth-child(2) {
+        left: 152px;
+      }
+
+      &--active {
+        z-index: 1;
+      }
+    }
+
+    // .menu__items
+
+    &__items {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+      grid-gap: 32px;
+    }
+
+    // .menu__item
+
+    &__item {
+      width: 64px;
+      height: 64px;
+      background-image: url('../images/shop/item-bg.png');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: grayscale(1);
+      transform-origin: center;
+      transition: all 0.5s ease;
+      z-index: 2;
+
+      &--active {
+        filter: grayscale(0);
+        transform: scale(1.1);
+      }
+
+      &:hover {
+        filter: grayscale(0);
+        z-index: 3;
+      }
+
+      &:hover .menu__description {
+        opacity: 1;
+      }
+    }
+
+    // .menu__icon
+
+    &__icon {
+      width: 90%;
+      height: 90%;
+      background-size: contain;
+
+      &--spear {
+        background-image: url('../images/shop/icon-spear.png');
+      }
+
+      &--armor {
+        background-image: url('../images/shop/icon-armor.png');
+      }
+
+      &--potion {
+        background-image: url('../images/shop/icon-potion.png');
+      }
+
+      &--shield {
+        background-image: url('../images/shop/icon-shield.png');
+      }
+
+      &--staff {
+        background-image: url('../images/shop/icon-staff.png');
+      }
+
+      &--axe {
+        background-image: url('../images/shop/icon-axe.png');
+      }
+    }
+
+    // .menu__description
+
+    &__description {
+      opacity: 0;
+      width: 400px;
+      position: absolute;
+      right: -410px;
+      color: black;
+      font-size: 32px;
+      background-color: #dfdcdc;
+      border-radius: 12px;
+      padding: 18px;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      text-align: left;
+    }
+  }
+
+  .info {
+    position: absolute;
+    top: 240px;
+    left: 565px;
+    width: 448px;
+    min-height: 192px;
+    padding: 50px;
+    background-image: url('../images/shop/menu-item-top.png'),
+      url('../images/shop/menu-item-bot.png'),
+      url('../images/shop/menu-item-mid.png');
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: top, bottom, center;
+    background-size: auto, auto, 448px 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+
+    & > *:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    // .item__text
+
+    &__text {
+    }
+
+    &__stats-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      & > *:not(:last-child) {
+        margin-bottom: 8px;
+      }
+    }
+
+    // .item__stats
+
+    &__stats {
+      display: flex;
+      align-items: center;
+    }
+
+    // .item__stats-icon
+
+    &__stats-icon {
+      width: 64px;
+      height: 64px;
+
+      // .item__stats-icon--atack
+
+      &--atack {
+        background-image: url('../images/shop/icon-attack.png');
+      }
+
+      &--deffense {
+        background-image: url('../images/shop/icon-deffense.png');
+      }
+
+      &--price {
+        background-image: url('../images/shop/icon-price.png');
+      }
+    }
+
+    // .item__stats-description
+
+    &__stats-description {
+      margin-left: 22px;
+    }
+
+    // .item__button
+
+    &__button {
+      padding-top: 6px;
+      width: 192px;
+      height: 64px;
+      background-image: url('../images/menu/btn-normal.png');
+
+      &:hover {
+        background-image: url('../images/menu/btn-hover.png');
+      }
+    }
+  }
+
+  .gold {
+    position: absolute;
+    top: 510px;
+    left: 213px;
+    width: 174px;
+    height: 64px;
+    background-image: url('../images/shop/gold-bg.png');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // .gold__icon
+
+    &__icon {
+      width: 54px;
+      height: 54px;
+      background-image: url('../images/shop/icon-gold.png');
+    }
+
+    // .gold__value
+
+    &__value {
+      margin-left: 10px;
+    }
+  }
+  .character {
+    position: absolute;
+    width: 256px;
+    height: 256px;
+    top: 124px;
+    left: 907px;
+    background-image: url('../images/dialogue/avatar-bg.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+
+    // .character__avatar
+
+    &__avatar {
+      width: 200px;
+      height: 200px;
+      background-image: url('../images/dialogue/merchant-avatar.png');
+    }
+
+    // .character__avatar--Merchant
+
+    &__avatar--Merchant {
+      background-image: url('../images/dialogue/merchant-avatar.png');
+    }
+  }
+
+  @keyframes shopin {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes shopout {
+    to {
+      opacity: 0;
+    }
+  }
+}
