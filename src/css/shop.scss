@@ -104,46 +104,46 @@
       transform-origin: center;
       transition: all 0.5s ease;
       background-size: contain;
-      background-image: url('../images/shop/item-bg.png');
+      background-image: url('../images/items/item-bg.png');
 
       &--spear {
-        background-image: url('../images/shop/icon-spear.png'),
-          url('../images/shop/item-bg.png');
+        background-image: url('../images/items/icon-spear.png'),
+          url('../images/items/item-bg.png');
         background-size: 90%, contain;
         background-position: center, center;
       }
 
       &--armor {
-        background-image: url('../images/shop/icon-armor.png'),
-          url('../images/shop/item-bg.png');
+        background-image: url('../images/items/icon-armor.png'),
+          url('../images/items/item-bg.png');
         background-size: 90%, contain;
         background-position: center, center;
       }
 
       &--potion {
-        background-image: url('../images/shop/icon-potion.png'),
-          url('../images/shop/item-bg.png');
+        background-image: url('../images/items/icon-potion.png'),
+          url('../images/items/item-bg.png');
         background-size: 90%, contain;
         background-position: center, center;
       }
 
       &--shield {
-        background-image: url('../images/shop/icon-shield.png'),
-          url('../images/shop/item-bg.png');
+        background-image: url('../images/items/icon-shield.png'),
+          url('../images/items/item-bg.png');
         background-size: 90%, contain;
         background-position: center, center;
       }
 
       &--staff {
-        background-image: url('../images/shop/icon-staff.png'),
-          url('../images/shop/item-bg.png');
+        background-image: url('../images/items/icon-staff.png'),
+          url('../images/items/item-bg.png');
         background-size: 90%, contain;
         background-position: center, center;
       }
 
       &--axe {
-        background-image: url('../images/shop/icon-axe.png'),
-          url('../images/shop/item-bg.png');
+        background-image: url('../images/items/icon-axe.png'),
+          url('../images/items/item-bg.png');
         background-size: 90%, contain;
         background-position: center, center;
       }
@@ -219,19 +219,20 @@
       // .item__stats-icon--atack
 
       &--attack {
-        background-image: url('../images/shop/icon-attack.png');
+        background-image: url('../images/items/icon-attack.png');
       }
 
       &--deffense {
-        background-image: url('../images/shop/icon-deffense.png');
+        background-image: url('../images/items/icon-deffense.png');
       }
 
-      &--price, &--sell-price {
-        background-image: url('../images/shop/icon-price.png');
+      &--price,
+      &--sell-price {
+        background-image: url('../images/items/icon-price.png');
       }
 
       &--health {
-        background-image: url('../images/shop/icon-health.png');
+        background-image: url('../images/items/icon-health.png');
       }
     }
 
@@ -311,8 +312,8 @@
     width: 64px;
     height: 64px;
     position: absolute;
-    right:20px;
-    top:20px;
+    right: 20px;
+    top: 20px;
     background-image: url('../images/shop/btn-exit-n.png');
 
     &:hover {
