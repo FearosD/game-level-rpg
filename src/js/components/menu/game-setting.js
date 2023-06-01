@@ -10,8 +10,12 @@ export default function gameSetting() {
     classElem: 'game__button-setting',
     id: 'btn-setting',
   });
+  const btnCharacter = createElement({
+    classElem: 'game__button-setting',
+    id: 'btn-character',
+  });
 
-  gameSetting.append(btnSound, btnSetting);
+  gameSetting.append(btnCharacter, btnSound, btnSetting);
 
   return gameSetting;
 }

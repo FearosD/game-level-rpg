@@ -48,6 +48,7 @@ export default class Controller {
 
     this.setting.subscribe('toggle sound', this.gameToggleSound);
     this.setting.subscribe('toggle setting', this.gameToggleSetting);
+    this.setting.subscribe('open character menu', this.gameOpenCharater);
 
     this.menuSave.createMenu();
     this.menuLoad.createMenu();
@@ -153,6 +154,10 @@ export default class Controller {
     console.warn('Toggle Setting');
     this.menu.gameMenu.classList.toggle('game__menu--slideout');
     this.game.canvas.classList.toggle('disabled');
+  };
+
+  gameOpenCharater = () => {
+    console.warn('Open charater menu');
   };
 
   startDialogue = (dialogueData) => {

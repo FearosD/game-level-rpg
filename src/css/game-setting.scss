@@ -44,6 +44,14 @@
       background-image: url('../images/setting/btn-setting-hover.png');
     }
   }
+
+  &#btn-character {
+    background-image: url('../images/setting/btn-character-normal.png');
+
+    &:hover {
+      background-image: url('../images/setting/btn-character-hover.png');
+    }
+  }
 }
 
 @keyframes settingin {

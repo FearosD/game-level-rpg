@@ -28,6 +28,8 @@ export const stylesImagesURL = [
   './images/setting/btn-sound-hover.png',
   './images/setting/btn-setting-normal.png',
   './images/setting/btn-setting-hover.png',
+  './images/setting/btn-character-normal.png',
+  './images/setting/btn-character-hover.png',
   './images/menu/menu-save.png',
   './images/menu/menu-transition.png',
   './images/dialogue/avatar-bg.png',
